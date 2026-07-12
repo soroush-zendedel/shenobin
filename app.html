@@ -1,0 +1,737 @@
+<!--
+    ============================================================================
+    ShenoBin - Visual Theory & Creative Studio
+    Copyright (C) 2026 soroush-zendedel.github.io/shenobin/
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+    ============================================================================
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- ================= META DATA ================= -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <title>ShenoBin - AI Composer & Music Theory Assistant</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="title" content="ShenoBin - AI Composer & Music Theory Assistant">
+    <meta name="description" content="Free offline AI music generator and DAW in your browser. Create melodies, arrange songs, and master music theory with ShenoBin. No login required.">
+    <meta name="keywords" content="AI music generator, online DAW, music theory tool, melody generator, chord calculator, circle of fifths, javascript synth, ShenoBin, free music maker">
+    <meta name="author" content="Soroush Zendedel">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://soroush-zendedel.github.io/shenobin/">
+    <meta property="og:title" content="ShenoBin - AI Composer & Music Theory Assistant">
+    <meta property="og:description" content="Create music instantly with pure AI logic. Features Song Structure Wizard, Markov Melody Generator, and interactive Theory Tools.">
+    <meta property="og:image" content="https://soroush-zendedel.github.io/shenobin/assets/shenobin-og.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://soroush-zendedel.github.io/shenobin/">
+    <meta property="twitter:title" content="ShenoBin - AI Composer & Music Theory Assistant">
+    <meta property="twitter:description" content="Create music instantly with pure AI logic. Try the offline browser DAW now.">
+    <meta property="twitter:image" content="https://soroush-zendedel.github.io/shenobin/assets/shenobin-og.jpg">
+
+    <link rel="manifest" href="/site.webmanifest">
+    
+    <meta name="theme-color" content="#252526">
+    
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="ShenoBin">
+
+    <link rel="icon" type="image/x-icon" href="/icons/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/icon16.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/icons/icon48.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/icons/icon96.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/icons/icon192.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+
+    <link rel="stylesheet" href="/css/style.css">
+    
+    <link rel="canonical" href="https://soroush-zendedel.github.io/shenobin/">
+    <script src="js/supabase-umd.js"></script>
+    <!-- <script src="/js/auth-loader.js"></script> -->
+</head>
+<body>
+    
+    <!-- 
+        ============================================================================
+        FALLBACK & WARNINGS
+        ============================================================================
+    -->
+    <noscript>
+        <div style="padding: 20px; text-align: center; color: white; background: #c0392b;">
+            <h1>JavaScript Required</h1>
+            <p>ShenoBin is a browser-based Audio Workstation. Please enable JavaScript to use this application.</p>
+        </div>
+    </noscript>
+
+    <div id="portrait-warning">
+        <div class="rotate-icon">⟳</div>
+        <h2>Please Rotate Your Device</h2>
+        <p>This app requires landscape mode for the best experience.</p>
+    </div>
+    
+    <!-- 
+        ============================================================================
+        TOP NAVIGATION BAR
+        ============================================================================
+    -->
+    <div id="top-bar">
+        <a href="https://soroush-zendedel.github.io/shenobin/" target="_blank" style="text-decoration: none; color: inherit;">
+            <div class="logo">🎹 ShenoBin <span style="font-size: 10px; opacity: 0.6; font-weight: normal;">v1.0</span></div>
+        </a>
+        
+        <!-- File Menu -->
+        <div class="menu-item">
+            <span>File</span>
+            <div class="dropdown-content">
+                <div id="menuNew">📄 New Project</div>
+                <hr style="border-color: #444; margin: 4px 0;">
+                <!-- Cloud Options -->
+                <div id="menuOpenCloud">☁️ Open from Cloud</div>
+                <div id="menuSaveCloud">☁️ Save to Cloud</div>
+                <hr style="border-color: #444; margin: 4px 0;">
+
+                <div id="menuOpen">📂 Open Project</div>
+                <div id="menuSave">💾 Save Project</div>
+                <hr>
+                <div id="menuImportMidi">📥 Import MIDI</div>
+                <div id="menuExportMidi">📤 Export MIDI</div>
+                <div id="menuExportWav">💾 Export WAV</div>
+            </div>
+        </div>
+
+        <!-- Edit Menu -->
+        <div class="menu-item">
+            <span>Edit</span>
+            <div class="dropdown-content">
+                <div id="menuUndo">↩ Undo (Ctrl+Z)</div>
+                <div id="menuRedo">↪ Redo (Ctrl+Y)</div>
+                <hr>
+                <div id="trimBarsBtn">✂️ Trim Empty Bars</div>
+                <div id="clearBtn">🗑️ Clear All Notes</div>
+            </div>
+        </div>
+
+        <!-- View Menu -->
+        <div class="menu-item">
+            <span>View</span>
+            <div class="dropdown-content">
+                <div id="toggleLabelsBtn">Show Note Labels</div>
+                <div id="toggleChordHighlightBtn">Highlight Chords</div>
+                <div id="toggleScaleHighlightBtn">Highlight Scale</div>
+            </div>
+        </div>
+
+        <!-- Tools Menu -->
+        <div class="menu-item">
+            <span>Tools</span>
+            <div class="dropdown-content">
+                <div id="synthMenuBtn">🎹 Synthesizer</div>
+                <div id="melodyGenBtn">✨ Melody Generator</div>
+                <div id="drumGenMenuBtn">🥁 Drum Generator</div>
+                <hr>
+                <div id="structureWizardBtn">🏗️ Song Structure Wizard</div>
+            </div>
+        </div>
+        
+        <!-- Theory Menu -->
+        <div class="menu-item">
+            <span>Theory</span> 
+            <div class="dropdown-content">
+                <div id="circleFifthsBtn">◎ Circle of Fifths</div>
+                <hr> 
+                <div id="chordCalcBtn">🧮 Chord Calculator</div>
+            </div>
+        </div>
+
+        <!-- Playback Controls -->
+        <div class="playback-controls">
+            <button id="toggleVisualizerBtn" title="Toggle Visualizer" style="color: #00d2d3;">📊</button>
+            <button id="autoScrollBtn" title="Toggle Auto-Scroll">➡</button>
+            <button id="playBtn">▶ Play</button>
+            <div class="bpm-control">
+                <span>BPM:</span>
+                <input type="number" id="bpmInput" value="120" min="40" max="300">
+            </div>
+
+        <!-- Login Controls -->
+        </div> <div id="user-profile-section" style="margin-left: 15px; margin-right: 15px; display: flex; align-items: center; gap: 10px;">
+            <span id="user-email-display" style="color: #00d2d3; font-size: 11px; display: none;"></span>
+            <button id="auth-action-btn" style="background: #00d2d3; color: #1e272e; border: none; padding: 6px 14px; border-radius: 20px; font-weight: bold; cursor: pointer; font-size: 12px; transition: 0.2s;">
+                Sign In
+            </button>
+        </div>
+    </div>
+
+    <!-- 
+        ============================================================================
+        GLOBAL CONTROLS (Scale, Time Signature, Grid)
+        ============================================================================
+    -->
+    <div id="controls">
+        <div class="control-group">
+            <label>Root:</label>
+            <select id="rootSelect"></select>
+        </div>
+        <div class="control-group">
+            <label>Scale:</label>
+            <select id="scaleSelect">
+                <option value="Major">Major</option>
+                <option value="Minor">Minor</option>
+                <option value="HarmonicMinor">Harmonic Minor</option>
+                <option value="Dorian">Dorian</option>
+                <option value="Mixolydian">Mixolydian</option>
+                <option value="Blues">Blues</option>
+                <option value="PentatonicMajor">Pentatonic Major</option>
+                <option value="PentatonicMinor">Pentatonic Minor</option>
+            </select>
+        </div>
+        <div class="control-group">
+            <label>Vocal:</label>
+            <select id="vocalRangeSelect">
+                <option value="NONE">No Limit</option>
+                <optgroup label="Female">
+                    <option value="SOPRANO">Soprano</option>
+                    <option value="MEZZO">Mezzo-Soprano</option>
+                    <option value="ALTO">Alto</option>
+                </optgroup>
+                <optgroup label="Male">
+                    <option value="TENOR">Tenor</option>
+                    <option value="BARITONE">Baritone</option>
+                    <option value="BASS">Bass</option>
+                </optgroup>
+            </select>
+        </div>
+        <div class="control-group">
+            <label>Time Sig:</label>
+            <select id="timeSigSelect">
+                <option value="4/4" selected>4/4</option>
+                <option value="3/4">3/4</option>
+                <option value="6/8">6/8</option>
+            </select>
+        </div>
+        <div class="control-group">
+            <label>Grid:</label>
+            <select id="rhythmSelect">
+                <option value="4">1/4 (Beat)</option>
+                <option value="8">1/8</option>
+                <option value="16" selected>1/16</option>
+                <option value="32">1/32</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- 
+        ============================================================================
+        MAIN EDITOR AREA (Tracks & Workspace)
+        ============================================================================
+    -->
+    <div id="editor-container">
+        <!-- Sidebar: Track Management -->
+        <div id="trackSidebar">
+            <div class="sidebar-header">
+                <span>TRACKS</span>
+            </div>
+
+            <div style="padding: 0 10px 10px 10px; position: relative;">
+                
+                <button id="addTrackMenuBtn" class="action-btn" style="width: 100%; background: #00d2d3; color: #1e272e; font-weight: bold; font-size: 14px; height: 30px; display: flex; align-items: center; justify-content: center; gap: 5px;">
+                    <span style="font-size:18px; line-height:0; margin-bottom:2px;">+</span> Add Track
+                </button>
+
+                <!-- Dropdown for Adding Tracks -->
+                <div id="addTrackDropdown" class="track-dropdown" style="display: none;">
+                    <div class="dropdown-category">General</div>
+                    <div class="dropdown-item" data-type="SYNTH" data-preset="Default">🎹 Basic Synth</div>
+                    <div class="dropdown-item" data-type="DRUMS" data-preset="Standard">🥁 Drum Kit</div>
+                    
+                    <div class="dropdown-category">Bass & Pads</div>
+                    <div class="dropdown-item" data-type="SYNTH" data-preset="Bass">🎸 Bass Guitar</div>
+                    <div class="dropdown-item" data-type="SYNTH" data-preset="Pad">🎻 Atmospheric Pad</div>
+                    <div class="dropdown-item" data-type="SYNTH" data-preset="Lead">⚡ Lead Synth</div>
+                </div>
+
+            </div>
+
+            <div id="trackListContainer"></div>
+        </div>
+
+        <!-- Main Workspace: Canvases -->
+        <div id="workspace">
+            <div id="chord-track-container">
+                <canvas id="chordCanvas"></canvas>
+            </div>
+            <div id="pianoRollArea">
+                <canvas id="mainCanvas"></canvas>
+                <div id="virtualSizer"></div>  
+                <div id="domPlayhead"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 
+        ============================================================================
+        FLOATING PANEL: SYNTHESIZER
+        ============================================================================
+    -->
+    <div id="synthPanel" class="floating-panel">
+        <div class="panel-header">
+            <span>🎹 Synthesizer</span>
+            <button id="closeSynthBtn" class="close-btn">×</button>
+        </div>
+        
+        <div class="panel-body synth-layout">
+            <div class="control-row wave-selector">
+                <label>Oscillator Type</label>
+                <select id="synthWave">
+                    <option value="triangle">Triangle (Soft)</option>
+                    <option value="sine">Sine (Pure)</option>
+                    <option value="square">Square (Retro)</option>
+                    <option value="sawtooth">Sawtooth (Sharp)</option>
+                </select>
+            </div>
+
+            <hr class="panel-divider">
+
+            <!-- ADSR Envelopes -->
+            <div class="adsr-group">
+                <div class="fader-col">
+                    <div class="fader-track">
+                        <input type="range" id="synthAttack" class="vertical-range" min="0" max="2" step="0.01" value="0.01">
+                    </div>
+                    <label>Attack</label>
+                    <span class="val-display">A</span>
+                </div>
+
+                <div class="fader-col">
+                    <div class="fader-track">
+                        <input type="range" id="synthDecay" class="vertical-range" min="0" max="2" step="0.01" value="0.2">
+                    </div>
+                    <label>Decay</label>
+                    <span class="val-display">D</span>
+                </div>
+
+                <div class="fader-col">
+                    <div class="fader-track">
+                        <input type="range" id="synthSustain" class="vertical-range" min="0" max="1" step="0.01" value="0.5">
+                    </div>
+                    <label>Sustain</label>
+                    <span class="val-display">S</span>
+                </div>
+
+                <div class="fader-col">
+                    <div class="fader-track">
+                        <input type="range" id="synthRelease" class="vertical-range" min="0" max="5" step="0.01" value="0.5">
+                    </div>
+                    <label>Release</label>
+                    <span class="val-display">R</span>
+                </div>
+            </div>
+
+            <hr class="panel-divider">
+            
+            <!-- Effects -->
+            <div class="fx-group">
+                <div class="fx-header">✨ Effects (FX)</div>
+                
+                <div class="fx-grid">
+                    <div class="fx-col">
+                        <label>Delay Mix</label>
+                        <input type="range" id="synthDelayMix" min="0" max="0.8" step="0.05" value="0">
+                    </div>
+                    <div class="fx-col">
+                        <label>Time</label>
+                        <input type="range" id="synthDelayTime" min="0.1" max="1.0" step="0.05" value="0.3">
+                    </div>
+                    <div class="fx-col">
+                        <label>Feedback</label>
+                        <input type="range" id="synthDelayFeed" min="0" max="0.8" step="0.05" value="0.4">
+                    </div>
+
+                    <div class="fx-col full-w">
+                        <label>Reverb Ambience</label>
+                        <input type="range" id="synthReverb" min="0" max="0.8" step="0.05" value="0">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 
+        ============================================================================
+        FLOATING PANEL: MELODY GENERATOR
+        ============================================================================
+    -->
+    <div id="melodyPanel" class="floating-panel">
+        <div class="panel-header">
+            <span>✨ AI Melody Generator</span>
+            <button id="closeMelodyBtn" class="close-btn">×</button>
+        </div>
+        
+        <div class="panel-body melody-grid">
+            <div class="melody-option">
+                <label>Start Bar</label>
+                <input type="number" id="genStartBar" value="1" min="1">
+            </div>
+            
+            <div class="melody-option">
+                <label>Length (Bars)</label>
+                <input type="number" id="genLength" value="4" min="1" max="16">
+            </div>
+
+            <div class="melody-option full-width">
+                <label>Complexity</label>
+                <select id="genComplexity">
+                    <option value="LOW">Simple & Chill</option>
+                    <option value="MEDIUM" selected>Balanced</option>
+                    <option value="HIGH">Busy & Fast</option>
+                </select>
+            </div>
+
+            <div class="melody-option full-width">
+                <label>Algorithm</label>
+                <select id="genAlgorithm">
+                    <option value="PATTERN" selected>Pattern Based (Repetitive)</option>
+                    <option value="MARKOV">Markov Chain (Random)</option>
+                </select>
+            </div>
+
+            <div class="melody-action">
+                <button id="doGenerateBtn" class="action-btn glow-btn">
+                    <span>🎲 Generate Melody</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 
+        ============================================================================
+        FLOATING PANEL: DRUM GENERATOR
+        ============================================================================
+    -->
+    <div id="drumGenPanel" class="floating-panel">
+        <div class="panel-header">
+            <span>🥁 AI Drum Generator</span>
+            <button id="closeDrumGenBtn" class="close-btn">×</button>
+        </div>
+        
+        <div class="panel-body melody-grid">
+            <div class="melody-option full-width">
+                <label>Genre</label>
+                <select id="drumGenre">
+                    <option value="ROCK">Rock / Basic</option>
+                    <option value="POP">Modern Pop</option>
+                    <option value="TECHNO">Techno / House</option>
+                    <option value="TRAP">Trap / Hip-Hop</option>
+                </select>
+            </div>
+
+            <div class="melody-option">
+                <label>Humanize</label>
+                <input type="range" id="drumHumanize" min="0" max="50" value="10" title="Variation %">
+            </div>
+            
+            <div class="melody-option">
+                 <label style="opacity:0">.</label>
+            </div>
+
+            <div class="melody-action">
+                <button id="doGenerateDrumsBtn" class="action-btn glow-btn" style="background: #ff9f43; color:#000;">
+                    <span>🥁 Generate Beat</span>
+                </button>
+            </div>
+            
+            <div style="font-size: 10px; color: #666; margin-top: 5px; text-align: center;">
+                Warning: Overwrites selected drum track.
+            </div>
+        </div>
+    </div>
+
+    <!-- 
+        ============================================================================
+        FLOATING PANEL: STRUCTURE WIZARD
+        ============================================================================
+    -->
+    <div id="structurePanel" class="floating-panel">
+        <div class="panel-header">
+            <span>🏗️ Song Structure Wizard</span>
+            <button id="closeStructureBtn" class="close-btn">×</button>
+        </div>
+        <div class="panel-body">
+            <div class="control-group" style="width:100%; margin-bottom:10px;">
+                <label style="width:70px;">Genre:</label>
+                <select id="wizardGenre" style="flex:1; background:#222; border:1px solid #444; color:#fff; padding:5px;"></select>
+            </div>
+
+            <div class="control-group" style="width:100%; margin-bottom:10px;">
+                <label style="width:70px;">Template:</label>
+                <select id="wizardTemplate" style="flex:1; background:#222; border:1px solid #444; color:#fff; padding:5px;"></select>
+            </div>
+
+            <div class="control-group" style="width:100%; margin-bottom:15px;">
+                <label style="width:70px;">Vibe:</label>
+                <select id="wizardVibe" style="flex:1; background:#222; border:1px solid #444; color:#fff; padding:5px;"></select>
+            </div>
+            
+            <div class="control-group" style="width:100%; margin-bottom:15px; justify-content: flex-start;">
+                <label style="width: auto; display: flex; align-items: center; cursor: pointer; color: var(--primary);">
+                    <input type="checkbox" id="structSpreadCheck" style="margin-right: 8px;">
+                    ✨ Cinematic Chords (Spread)
+                </label>
+            </div>
+
+            <div id="structInfo" style="background:#222; padding:10px; border-radius:4px; margin-bottom:15px; font-size:11px; color:#ccc; line-height:1.6; display:none; border-left: 3px solid var(--primary);"></div>
+
+            <button id="applyStructureBtn" class="action-btn">🚀 Generate Project</button>
+        </div>
+    </div>
+
+    <!-- 
+        ============================================================================
+        OVERLAY: CIRCLE OF FIFTHS
+        ============================================================================
+    -->
+    <div id="overlay-fifths" class="glass-overlay hidden">
+        <div class="glass-modal">
+            <div class="modal-header">
+                <h2>Circle of Fifths</h2>
+                <button id="close-overlay" class="close-btn">&times;</button>
+            </div>
+            <div class="modal-body" id="circle-container">
+                <!-- Content injected via JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- 
+        ============================================================================
+        OVERLAY: CHORD CALCULATOR
+        ============================================================================
+    -->
+    <div id="overlay-calculator" class="glass-overlay hidden">
+        <div class="glass-modal" style="width: 600px; min-height: 480px;"> 
+            <div class="modal-header">
+                <h2>Chord Calculator</h2>
+                <button id="close-calc-btn" class="close-btn">&times;</button>
+            </div>
+            
+            <div class="modal-body calc-layout">
+                <div class="calc-top-row">
+                    <div class="calc-group">
+                        <label>ROOT</label>
+                        <select id="calcRoot"></select>
+                    </div>
+                    <div class="calc-group" style="flex: 2;">
+                        <label>QUALITY</label>
+                        <select id="calcType"></select>
+                    </div>
+                    <div class="calc-group">
+                        <label>OCTAVE</label>
+                        <input type="number" id="calcOctave" value="4" min="1" max="7">
+                    </div>
+                </div>
+
+                <div id="calcDisplay" class="calc-display">--</div>
+
+                <div id="calcDesc" class="calc-desc">Select a chord...</div> 
+                <div class="calc-modifiers">
+                    <div></div>
+                    <div class="calc-mod-center">
+                        <button class="mod-btn" data-action="inv-down">◀</button>
+                        <span id="calcInvDisplay" style="min-width: 70px; text-align: center; font-size: 11px; color: #ccc;">Root Pos</span>
+                        <button class="mod-btn" data-action="inv-up">▶</button>
+                    </div>
+                    <div class="calc-mod-right">
+                        <button class="mod-btn" id="btnSpread"><span>↔</span> Spread</button>
+                    </div>
+                </div>
+
+                <div id="piano-container"></div>
+
+                <div class="calc-actions">
+                    <button id="calcPreviewBtn" class="action-btn" style="background: #2d3436; border: 1px solid #555;">🔊 Preview</button>
+                    <button id="calcInsertBtn" class="action-btn">🎹 Insert to Project</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 
+        ============================================================================
+        UTILITY ELEMENTS (Tooltips & File Inputs)
+        ============================================================================
+    -->
+    <div id="tooltip"></div>
+    
+    <input type="file" id="fileInput" accept=".json" style="display:none">
+    <input type="file" id="midiFileInput" accept=".mid,.midi" style="display:none">
+
+    <!-- 
+        ============================================================================
+        PRACTICE HUD (Heads-Up Display)
+        ============================================================================
+    -->
+    <div id="chordHUD" class="practice-hud" style="display: none;">
+        
+        <div class="hud-top-bar">
+            <span id="hudBarNum">BAR 0</span>
+            <span id="hudSection">SECTION</span>
+        </div>
+
+        <div class="hud-cards-row">
+            
+            <!-- Current Chord -->
+            <div id="cardCurr" class="chord-card card-now">
+                <span class="label-now">PLAYING NOW</span>
+                <div id="hudCurrentChord">--</div>
+            </div>
+
+            <div class="flow-arrow">➜</div>
+
+            <!-- Next Chord -->
+            <div id="cardNext" class="chord-card card-focus">
+                <span class="label-next">COMING UP</span>
+                <div id="hudNextChord">--</div>
+            </div>
+
+            <div class="flow-arrow" style="opacity: 0.5;">➜</div>
+
+            <!-- Future Chord -->
+            <div id="cardLater" class="chord-card card-future">
+                <span class="label-future">THEN...</span>
+                <div id="hudLaterChord">--</div>
+            </div>
+
+        </div>
+        
+        <div class="hud-progress-container">
+            <div id="hudProgressBar" class="hud-progress-fill"></div>
+        </div>
+    </div>
+    
+    <!-- 
+        ============================================================================
+        FLOATING PANEL: INSTRUMENT SELECTION
+        ============================================================================
+    -->
+    <div id="instrumentPanel" class="floating-panel">
+        <div class="panel-header">
+            <span>🎸 Select Instrument</span>
+            <button id="closeInstrumentBtn" class="close-btn">×</button>
+        </div>
+        <div class="panel-body">
+            <div id="instrumentList" class="instrument-grid"></div>
+        </div>
+    </div>
+
+    <!-- 
+        ============================================================================
+        CONTEXT MENUS & FLOATING BUTTONS
+        ============================================================================
+    -->
+    <div id="trackContextMenu" class="context-menu" style="display: none;">
+        <div id="ctxExportWav" class="ctx-item">💾 Export to WAV</div>
+        <div id="ctxExportMidi" class="ctx-item">🎹 Export to MIDI</div>
+        <hr style="border-color: #444; margin: 4px 0;">
+        <div id="ctxDeleteTrack" class="ctx-item" style="color: #ff6b6b;">🗑️ Delete Track</div>
+    </div>
+
+    <button id="toggleHudBtn" class="nav-btn">🎸 Practice Mode</button>
+    
+    <!-- ☁️ CLOUD PROJECTS OVERLAY ☁️ -->
+    <div id="overlay-cloud" class="glass-overlay hidden">
+        <div class="glass-modal" style="width: 500px; min-height: 400px;">
+            <div class="modal-header">
+                <h2>☁️ Cloud Projects</h2>
+                <button id="close-cloud-btn" class="close-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="cloud-loading" style="text-align: center; color: #888; padding: 20px;">
+                    Loading projects...
+                </div>
+                <div id="cloud-project-list" style="display: flex; flex-direction: column; gap: 8px; max-height: 300px; overflow-y: auto;">
+                    <!-- Projects injected here via JS -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="overlay-auth" class="glass-overlay hidden">
+        <div class="glass-modal" style="width: 320px; min-height: 250px; text-align: center;">
+            <div class="modal-header">
+                <h2>👤 Login/Register</h2>
+                <button id="close-auth-btn" class="close-btn">&times;</button>
+            </div>
+            <div class="modal-body" style="display: flex; flex-direction: column; gap: 12px; padding: 20px;">
+                <div id="auth-error-msg" style="color: #ff6b6b; font-size: 12px; display: none;"></div>
+                
+                <input type="email" id="auth-email" placeholder="Email" style="padding: 10px; border-radius: 5px; border: 1px solid #444; background: #222; color: #fff; font-family: inherit;">
+                <input type="password" id="auth-password" placeholder="Password" style="padding: 10px; border-radius: 5px; border: 1px solid #444; background: #222; color: #fff; font-family: inherit;">
+                
+                <div style="display: flex; gap: 10px; margin-top: 10px;">
+                    <button id="btn-signin" class="action-btn" style="flex: 1; background: #00d2d3; color: #000;">Login</button>
+                    <button id="btn-signup" class="action-btn" style="flex: 1; background: #2d3436; border: 1px solid #555;">Register</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Main Script -->
+    <script type="module" src="js/main.js"></script>
+        <!-- Clerk Logic Initialization -->
+    <script>
+      window.addEventListener('load', async function() {
+        // if (window.Clerk) {
+        //   try {
+        //     await window.Clerk.load();
+        //     const mountPoint = document.getElementById('clerk-mount-point');
+            
+        //     if (window.Clerk.user) {
+        //       // User is signed in, show the UserButton (Google-like profile)
+        //       window.Clerk.mountUserButton(mountPoint);
+        //     } else {
+        //       // User is not signed in, show a Sign In button
+        //       // We style it to match your theme
+        //       mountPoint.innerHTML = `
+        //         <button onclick="window.Clerk.openSignIn()" style="
+        //             background: #00d2d3; 
+        //             color: #1e272e; 
+        //             border: none; 
+        //             padding: 8px 16px; 
+        //             border-radius: 20px; 
+        //             font-weight: bold; 
+        //             cursor: pointer;
+        //             font-size: 13px;
+        //         ">
+        //           Sign In
+        //         </button>
+        //       `;
+        //     }
+        //   } catch (err) {
+        //     console.error("Clerk init error:", err);
+        //   }
+        // }
+      });
+    </script>
+</body>
+</html>

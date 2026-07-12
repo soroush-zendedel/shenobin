@@ -1,0 +1,38 @@
+{
+  "manifest_version": 3,
+  "name": "ShenoBin: Visual Theory & Creative Studio",
+  "short_name": "ShenoBin",
+  "version": "1.0.0",
+  "description": "Turn static theory into music. Unlock the hidden patterns of harmony, explore chords instantly, and spark ideas with an algorithmic AI co-pilot.",
+  "homepage_url": "https://soroush-zendedel.github.io/shenobin/",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "action": {
+    "default_title": "Open ShenoBin Studio"
+  },
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "permissions": [
+    "storage",
+    "activeTab",
+    "unlimitedStorage"
+  ],
+  "host_permissions": [
+    "https://epvkxzlglvvnmsswvzqp.supabase.co/*"
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; connect-src 'self' https://epvkxzlglvvnmsswvzqp.supabase.co; object-src 'self';"
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "soroush_zendedel@Live.com",
+      "strict_min_version": "109.0"
+    }
+  },
+  "offline_enabled": true
+}
