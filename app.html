@@ -733,5 +733,22 @@
         // }
       });
     </script>
+    <script>
+        // بررسی اینکه آیا برنامه در محیط افزونه در حال اجراست یا خیر
+        const isExtension = (typeof chrome !== 'undefined' && chrome.runtime && chrome.runtime.id) || 
+                            (typeof browser !== 'undefined' && browser.runtime && browser.runtime.id);
+
+        // اگر محیط افزونه نبود (یعنی روی گیت‌هاب اجرا شده بود)، آمارگیر را فعال کن
+        if (!isExtension) {
+            const cfScript = document.createElement('script');
+            cfScript.type = "module"; // برای تطابق دقیق با ساختار کلادفلیر
+            cfScript.src = "https://static.cloudflareinsights.com/beacon.min.js";
+            
+            // توکن اختصاصی کلادفلیر شما
+            cfScript.setAttribute('data-cf-beacon', '{"token": "56f07e0502db41eab94fe8aa551167ce"}'); 
+            
+            document.body.appendChild(cfScript);
+        }
+    </script>
 </body>
 </html>
