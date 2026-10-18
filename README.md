@@ -205,16 +205,7 @@ The English and Persian landing pages, product pages, application, and privacy p
 docker compose down
 ```
 
-### Build the English landing-page CSS
-
-The English landing page embeds its compiled Tailwind utilities in the HTML, so rendering does not depend on Google or visitors fetching a separate CSS file. When changing its utility classes, install the pinned build dependency and regenerate the CSS and inline block:
-
-```bash
-pnpm install --frozen-lockfile
-pnpm build:css
-```
-
-The generated `css/landing.css` is retained as a build artifact; the build script also synchronizes it into `index.html`. GitHub Pages and Docker serve the ready-to-render HTML, so visitors do not need Node.js or a Tailwind CDN request.
+The public landing pages use self-contained HTML and CSS and are served as static files. No Node.js or CSS build step is needed to deploy them.
 
 ### Persian web font
 
