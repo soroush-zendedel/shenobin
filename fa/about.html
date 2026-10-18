@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>document.documentElement.classList.add('js');</script>
   <link rel="preload" href="../assets/fonts/vazirmatn-arabic.woff2" as="font" type="font/woff2" crossorigin>
   <title>دربارهٔ شنوبین | ابزار ساخت موسیقی و تئوری</title>
   <meta name="description" content="شنوبین چیست و چه کمکی می‌کند؟ با فضای ساخت موسیقی و یادگیری تئوری در مرورگر، قابلیت‌ها، کاربران و مجوز پروژه آشنا شوید.">
@@ -48,8 +49,11 @@
     body { margin: 0; background: #0f1418; color: #f4f7f8; font: 16px/1.9 Vazirmatn, Tahoma, sans-serif; }
     a { color: #00d2d3; }
     .wrap { width: min(100% - 2rem, 900px); margin: auto; }
-    nav { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .75rem; padding: 1.25rem 0; }
-    nav div { display: flex; flex-wrap: wrap; gap: 1rem; }
+    nav { position: relative; z-index: 20; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .75rem; padding: 1.25rem 0; }
+    .brand { color: #fff; font-weight: 900; text-decoration: none; white-space: nowrap; }
+    .nav-toggle { display: none; align-items: center; justify-content: center; width: 44px; height: 44px; border: 1px solid #456067; border-radius: .65rem; color: #f4f7f8; background: #182228; cursor: pointer; }
+    .nav-toggle svg { width: 22px; height: 22px; }
+    .nav-links { display: flex; flex-wrap: wrap; gap: 1rem; }
     main { padding: clamp(1.25rem, 5vw, 3rem) 0 4rem; }
     h1 { font-size: clamp(2rem, 6vw, 3.5rem); line-height: 1.45; margin: 1rem 0; }
     h2 { line-height: 1.5; margin-top: 2.2rem; }
@@ -59,10 +63,23 @@
     figcaption { margin-top: .75rem; color: #b7c4c8; }
     .actions { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 2rem; }
     .actions a { padding: .7rem 1rem; border: 1px solid #00d2d3; border-radius: .65rem; text-decoration: none; }
+    @media (max-width: 640px) {
+      nav { flex-wrap: nowrap; }
+      html.js .nav-toggle { display: inline-flex; }
+      html.js .nav-links { position: absolute; top: calc(100% - .25rem); inset-inline: 0; z-index: 30; display: grid; gap: .2rem; padding: .5rem; border: 1px solid #2e4248; border-radius: .85rem; background: #182228; box-shadow: 0 1rem 2rem #0008; }
+      html.js .nav-links:not(.is-open) { display: none; }
+      html.js .nav-links a { min-height: 44px; display: flex; align-items: center; padding: .55rem .75rem; border-radius: .5rem; }
+    }
   </style>
 </head>
 <body><div class="wrap">
-  <nav aria-label="پیمایش اصلی"><a href="./">شنوبین</a><div><a href="../about.html" lang="en" hreflang="en">English</a><a href="./">صفحهٔ اصلی</a><a href="../app.html">ورود به استودیو</a><a href="https://github.com/soroush-zendedel/shenobin">کد منبع</a></div></nav>
+  <nav aria-label="پیمایش اصلی">
+    <a class="brand" href="./">شنوبین</a>
+    <button class="nav-toggle" id="navToggle" type="button" aria-label="باز کردن منو" aria-expanded="false" aria-controls="siteNavLinks">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"></path></svg>
+    </button>
+    <div class="nav-links" id="siteNavLinks"><a href="../about.html" lang="en" hreflang="en">English</a><a href="./">صفحهٔ اصلی</a><a href="../app.html">ورود به استودیو</a><a href="https://github.com/soroush-zendedel/shenobin">کد منبع</a></div>
+  </nav>
   <main>
     <h1>دربارهٔ شنوبین</h1>
     <p>شنوبین یک فضای ساخت موسیقی و یادگیری تئوری در مرورگر است. پیانو رول، ابزارهای صدا، نمایشگرهای تئوری و قابلیت‌های ایده‌پردازی را کنار هم می‌گذارد تا نوازنده بتواند ایده‌ای را بسازد، بشنود و گسترش دهد.</p>
@@ -77,4 +94,23 @@
     <p>پروژه با مجوز GNU GPL نسخهٔ ۳ یا بالاتر منتشر شده است. README پروژه همچنین از مجوز تجاری جداگانه برای کاربردهایی که به شرایطی بیرون از GPL نیاز دارند نام می‌برد. استفاده از وب‌اپ نیاز به خرید ندارد؛ این به معنی رایگان بودن مجوز تجاری جداگانه نیست.</p>
     <div class="actions"><a href="./">صفحهٔ فارسی</a><a href="../app.html">اجرای شنوبین</a><a href="../about.html" lang="en" hreflang="en">About in English</a><a href="https://github.com/soroush-zendedel/shenobin">مشاهدهٔ کد منبع</a></div>
   </main>
-</div></body></html>
+</div>
+<script>
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('siteNavLinks');
+  const setMenuOpen = (open) => {
+    navToggle.setAttribute('aria-expanded', String(open));
+    navToggle.setAttribute('aria-label', open ? 'بستن منو' : 'باز کردن منو');
+    navLinks.classList.toggle('is-open', open);
+  };
+  navToggle.addEventListener('click', () => {
+    setMenuOpen(navToggle.getAttribute('aria-expanded') !== 'true');
+  });
+  navLinks.addEventListener('click', (event) => {
+    if (event.target.closest('a')) setMenuOpen(false);
+  });
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') setMenuOpen(false);
+  });
+</script>
+</body></html>
