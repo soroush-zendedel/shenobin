@@ -207,14 +207,14 @@ docker compose down
 
 ### Build the English landing-page CSS
 
-The English landing page uses a checked-in, locally served Tailwind stylesheet. When changing its utility classes, install the pinned build dependency and regenerate the stylesheet:
+The English landing page embeds its compiled Tailwind utilities in the HTML, so rendering does not depend on Google or visitors fetching a separate CSS file. When changing its utility classes, install the pinned build dependency and regenerate the CSS and inline block:
 
 ```bash
 pnpm install --frozen-lockfile
 pnpm build:css
 ```
 
-The generated `css/landing.css` is served directly by GitHub Pages and Docker; visitors do not need Node.js or a Tailwind CDN request.
+The generated `css/landing.css` is retained as a build artifact; the build script also synchronizes it into `index.html`. GitHub Pages and Docker serve the ready-to-render HTML, so visitors do not need Node.js or a Tailwind CDN request.
 
 ## 🤝 Contributing & Feature Requests
 
