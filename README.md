@@ -1,260 +1,257 @@
-# ShenoBin 🎵
+# ShenoBin
 
-![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)
-![License](https://img.shields.io/badge/license-GPLv3-green.svg)
-![Platform](https://img.shields.io/badge/platform-Web%20%7C%20Chrome%20Ext-orange.svg)
-![Runtime Dependencies](https://img.shields.io/badge/runtime%20dependencies-zero-brightgreen.svg)
+**A browser-based music workspace for learning theory, composing, and experimenting with sound.**
 
-## Visual Theory & Creative Studio - ShenoBin Music Project
+[![Version](https://img.shields.io/badge/version-1.0.0-00bfc2)](manifest.json)
+[![License: GPL-3.0-or-later](https://img.shields.io/badge/license-GPL--3.0--or--later-blue)](LICENSE)
+[![Languages: English and Persian](https://img.shields.io/badge/languages-English%20%7C%20Persian-7b61a8)](#pages-and-languages)
 
-**Powered by [ShenoBin](https://soroush-zendedel.github.io/shenobin/)**
+**ShenoBin** brings a piano-roll workspace, music-theory tools, synthesized sound, and idea-generation features together in one web app. Use it to explore harmony, sketch a musical idea, listen to it in the browser, and export it for further work in a DAW.
 
-> **Where Music Theory meets Pure JavaScript & Algorithmic Composition.**
+- **Live site:** [English](https://soroush-zendedel.github.io/shenobin/) · [فارسی](https://soroush-zendedel.github.io/shenobin/fa/)
+- **Studio:** [Open ShenoBin](https://soroush-zendedel.github.io/shenobin/app.html)
+- **Product information:** [About ShenoBin](https://soroush-zendedel.github.io/shenobin/about.html) · [دربارهٔ شنوبین](https://soroush-zendedel.github.io/shenobin/fa/about.html)
+- **Source and issue tracker:** [GitHub repository](https://github.com/soroush-zendedel/shenobin)
+- **License:** [GNU GPL version 3 or later](LICENSE)
 
-**ShenoBin** is a dual-purpose web application designed for both **music education** and **creative production**. It bridges the gap between learning theory and applying it, using a lightweight architecture built entirely in **Vanilla JavaScript**.
+## What you can do
 
-Whether you are a student visualizing the Circle of Fifths or a producer looking for algorithmic melody ideas, this tool runs instantly in your browser with **zero dependencies**.
+- Write, move, resize, and play notes in a piano roll; adjust tempo, key, and scale.
+- Explore harmonic relationships with the Circle of Fifths, chord calculator, and chord suggestions.
+- Generate melody continuations with a Markov-chain process, create drum patterns, and sketch song structures.
+- Play notes with the built-in synthesizer and use the practice display to follow chords.
+- Import MIDI, save and reopen project files, and export MIDI or WAV.
+- Save projects to the cloud when signed in and connected to the configured service.
 
-## 🌟 Core Philosophy
+ShenoBin is intended for music learners and teachers, songwriters, and producers who want a quick place to explore theory or develop a musical sketch. It complements a full DAW rather than replacing one.
 
-This project serves two distinct user groups:
+## Pages and languages
 
-### 1. 🎓 For Education (Theory & Structure)
+| Page | English | فارسی |
+| --- | --- | --- |
+| Landing page | [Open](https://soroush-zendedel.github.io/shenobin/) · `/` | [باز کردن](https://soroush-zendedel.github.io/shenobin/fa/) · `/fa/` |
+| Product About page | [Open](https://soroush-zendedel.github.io/shenobin/about.html) · `/about.html` | [باز کردن](https://soroush-zendedel.github.io/shenobin/fa/about.html) · `/fa/about.html` |
+| Music studio | [Open](https://soroush-zendedel.github.io/shenobin/app.html) · `/app.html` | The studio interface is currently in English. |
+| Privacy | [Privacy policy](https://soroush-zendedel.github.io/shenobin/privacy.html) · `/privacy.html` | The published privacy page is currently in English. |
 
-Designed as a **"Sandbox for Music Theory,"** this tool allows educators to demonstrate complex concepts visually and interactively, moving beyond static textbook examples.
+The landing and About pages are available in English and Persian. `sitemap.xml` lists the public pages and the reciprocal language alternatives for translated pairs.
 
-* **Visualizing Diatonic Relationships:** The **Interactive Circle of Fifths** (`CircleOfFifths.js`) connects directly to the piano roll. Teachers can demonstrate **modulation** instantly: clicking a new key shifts the grid's highlighted "safe notes," allowing students to *see* how scales overlap and diverge.
+## Run locally
 
-* **Instant Harmonic Feedback:** The `ChordCalculator` engine acts as a **real-time harmony spell-checker**. As students stack notes, the system analyzes intervals to identify chords (e.g., "C Major 7", "D min 9") immediately. This reinforces the connection between vertical note spacing and chord nomenclature.
+The site is served as static files. You do not need Node.js, npm, pnpm, or a frontend build step. Run a local web server from the project root; opening `app.html` directly as a `file://` URL may prevent JavaScript modules from loading.
 
-* **The Math-Music Connection:** Educators can use the `MusicBrain` to teach **stochastic processes**. By observing how the Markov Chain algorithm generates melodies based on input probabilities, students can visualize the mathematical structure behind musical improvisation and style.
+### Python
 
-* **Safe Experimentation Environment:** With a robust **Undo/Redo History System** (`History.js`), students can experiment fearlessly. They can try complex progressions, make mistakes, and revert instantly, encouraging "learning by doing" rather than passive observation.
+With Python 3 installed, run:
 
-### 2. 🎹 For Production (The Creative Engine)
+```bash
+python -m http.server 8000
+```
 
-A capable sketching tool for your musical ideas.
+On Windows, `py -m http.server 8000` may be used instead. Open [http://localhost:8000](http://localhost:8000). Stop the server with `Ctrl+C`.
 
-* **Adaptive Style Generation:** The `MusicBrain` (Markov Chain) doesn't just output random notes. It analyzes the **statistical structure** of your current melody. If you write a jazz progression, it suggests jazzy continuations. If you write a simple pop melody, it adapts to that simplicity.
+### Docker Compose
 
-* **Multi-Instrument Support:** Switch between different synthesized tones defined in `InstrumentDefs.js` (e.g., Sine, Square, Sawtooth, Custom Synths) to hear how your melody sounds with different timbres.
-
-* **Export Formats (MIDI & WAV):** Don't let your ideas stay in the browser. Use the `Exporter` to download standard **MIDI files** for your DAW, or render high-quality **WAV audio** directly from the engine.
-
-## 📖 Comprehensive User Guide
-
-### 1. The Workspace
-
-The interface is divided into three logical zones:
-
-* **Top Toolbar:** Controls for Playback (Play/Stop), Tempo (BPM), Instrument Selection, and global settings (Undo/Redo).
-
-* **The Grid (Piano Roll):** The main canvas where horizontal axis represents Time and vertical axis represents Pitch. Light rows indicate "in-key" notes; dark rows are outside the selected scale.
-
-* **Theory Panel (Bottom):** Houses the **Circle of Fifths** visualizer and Scale/Key selectors.
-
-### 2. Controls & Interaction
-
-Designed for speed and fluidity, similar to professional desktop DAWs:
-
-**Mouse Actions:**
-
-* **Create Note:** Click on any empty grid cell.
-
-* **Select/Move:** Click and drag the center of an existing note to move it in time or pitch.
-
-* **Resize Duration:** Hover over the right edge of a note (cursor changes) and drag to lengthen or shorten the note.
-
-* **Delete:** (Depending on configuration) Right-click a note or Select + Press Delete.
-
-**Keyboard Shortcuts:**
-
-* `Spacebar`: Toggle Play/Pause.
-
-* `Delete` / `Backspace`: Remove selected notes.
-
-* `Ctrl + Z` / `Cmd + Z`: Undo last action.
-
-* `Ctrl + Y` / `Cmd + Shift + Z`: Redo.
-
-### 3. Theory & Composition Tools
-
-* **Changing Keys:** Click on any slice of the **Circle of Fifths**. The entire grid will update immediately. Notes that were previously "correct" might dim, showing they are now out of key.
-
-* **Scale Modes:** Use the dropdown to switch between Major, Minor, Dorian, etc. This filters which notes are highlighted on the grid.
-
-* **Chord Hints:** Select a group of notes to see the detected chord name in the status bar (powered by `ChordCalculator`).
-
-### 4. Algorithmic Generation (The "Brain")
-
-1. **Prime the Engine:** The Markov Chain needs data to learn from. Draw at least 4-8 notes manually to establish a rhythm and interval pattern.
-
-2. **Generate:** Click the **"Generate"** button. The AI will look at your last few notes and append a continuation that statistically matches your style.
-
-3. **Iterate:** Don't like the result? Hit `Undo` (Ctrl+Z) and try generating again for a different variation.
-
-### 5. Import & Export
-
-* **Import MIDI:** Drag and drop any `.mid` file directly onto the canvas to load it. The `MidiParser` will map it to the grid.
-
-* **Export MIDI:** Saves the current pattern as a standard MIDI file for use in Ableton, Logic, or FL Studio.
-
-* **Export WAV:** Renders the internal audio engine's output to a high-quality `.wav` file for immediate listening.
-
-## 🧠 Architecture Overview
-
-The codebase is modular, making it an excellent resource for developers studying audio programming. Here is the complete breakdown of the JavaScript modules:
-
-| Module | Role | Description |
-| :--- | :--- | :--- |
-| **`main.js`** | **Core** | The application entry point. Initializes all modules and sets up global event listeners. |
-| **`State.js`** | **Store** | The "Single Source of Truth". Manages active notes, tempo, key, playback status, and settings. |
-| **`MusicBrain.js`** | **Algo** | Implements Markov Chains to learn note transition probabilities and generate sequences. |
-| **`AudioEngine.js`** | **Audio** | A low-latency wrapper around the Web Audio API. Handles real-time polyphony and gain staging. |
-| **`Renderer.js`** | **View** | Handles the HTML5 Canvas drawing loop for the grid, notes, and playhead. |
-| **`Interaction.js`** | **Events** | Bridges DOM events (Mouse/Keyboard) to State mutations (Click, Drag, Resize). |
-| **`Exporter.js`** | **IO** | Handles data serialization. Generates `.mid` files and renders offline audio for `.wav` export. |
-| **`History.js`** | **Util** | Manages the Undo/Redo stack, allowing users to revert changes safely. |
-| **`InstrumentDefs.js`** | **Data** | Defines the synthesis parameters (ADSR envelopes, oscillator types) for different presets. |
-| **`CircleOfFifths.js`** | **Theory** | Contains logic for calculating key signatures and rendering the circular visualizer. |
-| **`ChordCalculator.js`** | **Theory** | Logic for determining appropriate chords based on the current scale and root note. |
-| **`MidiParser.js`** | **IO** | Parses uploaded binary MIDI data into application-readable JSON format. |
-| **`background.js`** | **Ext** | Chrome Extension service worker (handles lifecycle events when installed as an extension). |
-
-## 🔮 Roadmap & Future Plans
-
-The project is actively evolving. Here are the key features planned for upcoming releases:
-
-### Global Music Support
-
-* **Iranian Dastgahs & Microtonal Scales:** Implementing quarter-tone playback (Koron/Sori) and specific scale visualizations for **Persian musical modes**, Arabic Maqams, and other non-Western traditions.
-
-* **Expanded Genre Models:** Pre-trained Markov models for specific styles including **Lo-Fi, Trap, Classical, and Ambient**.
-
-### Platform Expansion
-
-* **Official Store Releases:** Publishing the extension to **Chrome Web Store, Firefox Add-ons, and Microsoft Edge Add-ons** for one-click installation and automatic updates.
-
-* **Native Mobile Apps:** Developing dedicated **iOS and Android applications** to bring the full production experience to mobile devices.
-
-* **Responsive Design Overhaul:** Adapting the interface for seamless usage across **all screen sizes**, ensuring the workspace scales fluidly from desktop monitors to tablets and smartphones.
-
-### Cloud & Connectivity
-
-* **Cloud Ecosystem:** User authentication system to save projects to the cloud, allowing cross-device synchronization and community sharing.
-
-* **AI Lyricist Integration:** Connecting to LLM APIs to generate lyrics based on the mood and structure of the composed melody.
-
-### Smart Content Creation
-
-* **High-Fidelity AI Rendering:** Integration with generative audio models (like **MusicGen** or Stable Audio) to transform MIDI sketches into fully produced, realistic audio tracks.
-
-* **"Soundtrack the Web" (Extension Exclusive):** A context-menu feature to analyze the text/sentiment of any webpage and generate an instant, fitting background track.
-
-* **Lyric-to-Melody Engine:** A reverse-generation tool where users input lyrics, and the engine composes a melody that fits the syllabic rhythm.
-
-* **Social Media Presets:** Auto-formatting and time-boxing tools to generate loops specifically for **TikTok (15s/60s), YouTube Shorts, and Instagram Reels**.
-
-### Core Improvements
-
-* **Advanced Synthesis:** Adding Filters (LPF/HPF) and LFO modulation to the Audio Engine for richer sound design.
-
-* **Touch Optimization:** Enhanced UI controls for better usability on tablets and touch screens.
-
-## 🚀 Installation
-
-### As a Chrome Extension
-
-1. Clone this repository.
-
-2. Go to `chrome://extensions/` > Enable **Developer mode**.
-
-3. Click **Load unpacked** > Select folder.
-
-### As a Web App
-
-Simply open `index.html`. No build steps (npm/yarn) required.
-
-> **💡 Note for Developers:** Because this project uses ES6 Modules, opening `index.html` directly via the file system (`file://`) may cause CORS errors in some browsers. For the best development experience, run a local server:
->
-> ```bash
-> # Python 3
-> python -m http.server
-> # Node.js (via npx)
-> npx serve
-> ```
-
-### Run the website with Docker Compose
-
-Install and start Docker Desktop, then run these commands from the project directory:
+Install Docker Desktop or Docker Engine with the Compose v2 plugin, then run this from the repository root:
 
 ```bash
 docker compose up --build -d
 ```
 
-Open [http://localhost:8080](http://localhost:8080). The service is bound to localhost only. To use another host port, set `SHENOBIN_PORT` before starting Compose:
+Open [http://localhost:8080](http://localhost:8080). Compose binds the web server to `127.0.0.1`, so it is available on the local machine. To use a different host port in PowerShell:
 
 ```powershell
 $env:SHENOBIN_PORT = "8081"
 docker compose up --build -d
 ```
 
-The English and Persian landing pages, product pages, application, and privacy page are served as static files by Nginx. To stop the local server, run:
+In Bash or another POSIX shell:
 
 ```bash
-docker compose down
+SHENOBIN_PORT=8081 docker compose up --build -d
 ```
 
-The public landing pages use self-contained HTML and CSS and are served as static files. No Node.js or CSS build step is needed to deploy them.
+Useful commands:
 
-### Persian web font
+```bash
+docker compose logs -f web  # Follow the web server logs
+docker compose ps           # Check service status
+docker compose down         # Stop and remove the container
+```
 
-The Persian landing and product pages use locally hosted Vazirmatn WOFF2 subsets for Arabic/Persian and Latin characters. The font license is included at `assets/fonts/OFL.txt`; the pages do not request the font from Google Fonts at runtime.
+The first Docker build needs to download the Nginx base image. The container serves the project files through Nginx; it does not run a separate application build.
 
-## 🤝 Contributing & Feature Requests
+## Browser support and connectivity
 
-We welcome contributions! Whether it's fixing bugs, improving the documentation, or proposing new features (like new instrument definitions), please feel free to fork the repository and submit a Pull Request.
+The studio requires JavaScript, ES modules, HTML Canvas, and the Web Audio API. Use a current desktop browser for the full workspace. Audio playback may require a user gesture, as required by browser audio policies.
 
-🎶 Request a Music Style or Feature
-Have a specific musical tradition or genre you want to see? (e.g., Persian Dastgahs, Indian Ragas, Lo-Fi patterns)?
-Please open an Issue on GitHub with the label feature request. We prioritize community-requested styles and tools!
+Core composition and sound features run in the browser. Sign-in and cloud project storage require an internet connection and the configured Supabase service. The repository also contains a Manifest V3 browser-extension package; it is not distributed through a browser extension store from this repository.
 
-## 🛠 Tech Stack
+## Project layout
 
-* **Core:** Vanilla JavaScript (ES6+)
+```text
+.
+├── index.html              # English landing page
+├── fa/
+│   ├── index.html          # Persian landing page
+│   └── about.html          # Persian product information
+├── about.html              # English product information
+├── app.html                # Music studio
+├── privacy.html            # Privacy policy
+├── css/style.css           # Studio styles
+├── js/                     # Studio modules and local dependencies
+├── img/                    # Landing and feature images
+├── assets/                 # Social image and local fonts
+├── icons/                  # Site and extension icons
+├── manifest.json           # Browser-extension manifest
+├── background.js           # Extension service worker
+├── docker-compose.yml      # Local web-server configuration
+├── Dockerfile              # Nginx static-site image
+├── nginx.conf              # Nginx site configuration
+├── sitemap.xml             # Public URL and language-alternate sitemap
+└── LICENSE                 # GNU GPL version 3 or later
+```
 
-* **Audio:** Web Audio API (Native browser synthesis)
+The public landing pages use self-contained HTML and CSS. The studio’s JavaScript is organized into modules for application state, drawing, interaction, audio, theory, MIDI, history, and export.
 
-* **Graphics:** HTML5 Canvas (via `Renderer.js`) & CSS Grid
+## Development and contributions
 
-* **Data:** JSON (for MIDI parsing/exporting)
+For a content-only change, edit the relevant HTML page. Landing-page styles are in each landing page’s inline `<style>` block; studio styles are in `css/style.css`, and studio behavior is implemented in `js/`.
 
-## ⚖️ License & Commercial Usage
+When changing public pages, keep language-specific text and metadata aligned, use working relative asset links, and update `sitemap.xml` when public URLs or their last-modified dates change. Keep product claims consistent with visible behavior and the project license.
 
-**ShenoBin** is dual-licensed software.
+Issues and pull requests are welcome. For larger changes, opening an issue first helps discuss the intended behavior. Do not commit local environment files, credentials, or generated project exports.
 
-### 1. Open Source License (GPLv3)
+## License
 
-This program is free software: you can redistribute it and/or modify it under the terms of the **GNU General Public License** as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+ShenoBin is free software distributed under the **GNU General Public License, version 3 or (at your option) any later version**. See [LICENSE](LICENSE) for the license text and redistribution terms.
 
-This allows for free use in **educational, personal, and open-source projects**.
-
-### 2. Commercial License
-
-For proprietary use, closed-source distribution, or integration into commercial products without GPL restrictions, a **Commercial License** is available.
-
-**Why buy a commercial license?**
-
-* **Release your product under your own license** (non-GPL).
-
-* **Direct technical support** from the ShenoBin team.
-
-* **Legal assurance** and indemnification.
-
-For commercial licensing inquiries, please contact: **Soroush_Zendedel@Live.com**
-
-**All branding, names, and associated assets are property of [ShenoBin](https://soroush-zendedel.github.io/shenobin/).**
+For inquiries about commercial licensing, contact [Soroush Zendedel](mailto:Soroush_Zendedel@Live.com). The terms in `LICENSE` apply unless a separate license is arranged.
 
 ---
 
-**Made with ❤️, Logic, and 🎵 by Soroush Zendedel**
+# شنوبین
+
+**فضای موسیقی در مرورگر برای یادگیری تئوری، آهنگ‌سازی و تجربه با صدا.**
+
+**شنوبین** پیانو رول، ابزارهای تئوری موسیقی، صدای تولیدشده و قابلیت‌های ایده‌پردازی را در یک برنامهٔ تحت وب کنار هم قرار می‌دهد. با آن هارمونی را بررسی کنید، طرح موسیقایی بسازید، در مرورگر بشنوید و برای ادامهٔ کار به نرم‌افزار آهنگ‌سازی خود خروجی بگیرید.
+
+- **نسخهٔ آنلاین:** [English](https://soroush-zendedel.github.io/shenobin/) · [فارسی](https://soroush-zendedel.github.io/shenobin/fa/)
+- **استودیو:** [اجرای شنوبین](https://soroush-zendedel.github.io/shenobin/app.html)
+- **معرفی محصول:** [About ShenoBin](https://soroush-zendedel.github.io/shenobin/about.html) · [دربارهٔ شنوبین](https://soroush-zendedel.github.io/shenobin/fa/about.html)
+- **کد منبع و گزارش مشکل:** [مخزن گیت‌هاب](https://github.com/soroush-zendedel/shenobin)
+- **مجوز:** [GNU GPL نسخهٔ ۳ یا بالاتر](LICENSE)
+
+## چه کارهایی می‌توانید انجام دهید؟
+
+- نت‌ها را در پیانو رول بنویسید، جابه‌جا یا کوتاه‌وبلند کنید و پخش کنید؛ تمپو، گام و تونالیته را تنظیم کنید.
+- ارتباط هارمونیک را با دایرهٔ پنجم‌ها، محاسبه‌گر آکورد و پیشنهادهای آکورد بررسی کنید.
+- با فرایند زنجیرهٔ مارکوف ادامهٔ ملودی بسازید، الگوی درام تولید کنید و ساختار قطعه را طرح‌ریزی کنید.
+- نت‌ها را با سینتی‌سایزر داخلی بشنوید و در حالت تمرین آکوردها را دنبال کنید.
+- فایل MIDI وارد کنید، پروژه را ذخیره و دوباره باز کنید و خروجی MIDI یا WAV بگیرید.
+- پس از ورود به حساب و اتصال به سرویس پیکربندی‌شده، پروژه‌ها را در فضای ابری ذخیره کنید.
+
+شنوبین برای هنرجوها و مدرس‌های موسیقی، ترانه‌سراها و تولیدکنندگانی مناسب است که محیطی سریع برای بررسی تئوری یا گسترش یک طرح موسیقایی می‌خواهند. این ابزار مکمل نرم‌افزار کامل آهنگ‌سازی است و جایگزین آن نیست.
+
+## صفحه‌ها و زبان‌ها
+
+| صفحه | English | فارسی |
+| --- | --- | --- |
+| صفحهٔ اصلی | [باز کردن](https://soroush-zendedel.github.io/shenobin/) · `/` | [باز کردن](https://soroush-zendedel.github.io/shenobin/fa/) · `/fa/` |
+| معرفی محصول | [Open](https://soroush-zendedel.github.io/shenobin/about.html) · `/about.html` | [باز کردن](https://soroush-zendedel.github.io/shenobin/fa/about.html) · `/fa/about.html` |
+| استودیو موسیقی | [Open](https://soroush-zendedel.github.io/shenobin/app.html) · `/app.html` | رابط استودیو در حال حاضر انگلیسی است. |
+| حریم خصوصی | [سیاست حریم خصوصی](https://soroush-zendedel.github.io/shenobin/privacy.html) · `/privacy.html` | صفحهٔ منتشرشدهٔ حریم خصوصی فعلاً انگلیسی است. |
+
+صفحه‌های اصلی و معرفی محصول به فارسی و انگلیسی در دسترس‌اند. `sitemap.xml` صفحه‌های عمومی و پیوندهای متقابل نسخه‌های ترجمه‌شده را فهرست می‌کند.
+
+## اجرای محلی
+
+سایت به‌صورت فایل‌های ایستا ارائه می‌شود و برای اجرا به Node.js، npm، pnpm یا مرحلهٔ build فرانت‌اند نیاز ندارد. سرور محلی را از ریشهٔ پروژه اجرا کنید؛ بازکردن مستقیم `app.html` با نشانی `file://` ممکن است مانع بارگذاری ماژول‌های JavaScript شود.
+
+### با Python
+
+با نصب Python 3، این دستور را اجرا کنید:
+
+```bash
+python -m http.server 8000
+```
+
+در ویندوز می‌توانید از `py -m http.server 8000` استفاده کنید. سپس [http://localhost:8000](http://localhost:8000) را باز کنید. برای توقف سرور `Ctrl+C` را بزنید.
+
+### با Docker Compose
+
+Docker Desktop یا Docker Engine به‌همراه افزونهٔ Compose نسخهٔ ۲ را نصب کنید و از ریشهٔ مخزن اجرا کنید:
+
+```bash
+docker compose up --build -d
+```
+
+سپس [http://localhost:8080](http://localhost:8080) را باز کنید. Compose وب‌سرور را به `127.0.0.1` متصل می‌کند؛ بنابراین از همان دستگاه در دسترس است. برای انتخاب پورت میزبان دیگر در PowerShell:
+
+```powershell
+$env:SHENOBIN_PORT = "8081"
+docker compose up --build -d
+```
+
+در Bash یا پوسته‌های مشابه:
+
+```bash
+SHENOBIN_PORT=8081 docker compose up --build -d
+```
+
+دستورهای کاربردی:
+
+```bash
+docker compose logs -f web  # مشاهدهٔ پیوستهٔ گزارش وب‌سرور
+docker compose ps           # بررسی وضعیت سرویس
+docker compose down         # توقف و حذف کانتینر
+```
+
+ساخت Docker در اجرای نخست به دریافت image پایهٔ Nginx نیاز دارد. کانتینر فایل‌های پروژه را با Nginx ارائه می‌کند و برنامه را جداگانه build نمی‌کند.
+
+## مرورگر و اتصال شبکه
+
+استودیو به JavaScript، ماژول‌های ES، HTML Canvas و Web Audio API نیاز دارد. برای استفاده از همهٔ بخش‌های محیط کار از مرورگر دسکتاپ به‌روز استفاده کنید. طبق سیاست مرورگرها، شروع پخش صدا ممکن است به تعامل کاربر نیاز داشته باشد.
+
+ابزارهای اصلی ساخت موسیقی در مرورگر اجرا می‌شوند. ورود به حساب و ذخیرهٔ ابری به اینترنت و سرویس Supabase پیکربندی‌شده نیاز دارد. مخزن همچنین بستهٔ افزونهٔ مرورگر با Manifest نسخهٔ ۳ دارد؛ این مخزن افزونه را از طریق فروشگاه رسمی مرورگرها منتشر نمی‌کند.
+
+## ساختار پروژه
+
+```text
+.
+├── index.html              # صفحهٔ اصلی انگلیسی
+├── fa/
+│   ├── index.html          # صفحهٔ اصلی فارسی
+│   └── about.html          # معرفی محصول به فارسی
+├── about.html              # معرفی محصول به انگلیسی
+├── app.html                # استودیوی موسیقی
+├── privacy.html            # سیاست حریم خصوصی
+├── css/style.css           # استایل‌های استودیو
+├── js/                     # ماژول‌های استودیو و وابستگی‌های محلی
+├── img/                    # تصویرهای اصلی و قابلیت‌ها
+├── assets/                 # تصویر شبکه‌های اجتماعی و فونت‌های محلی
+├── icons/                  # آیکون‌های سایت و افزونه
+├── manifest.json           # مانیفست افزونهٔ مرورگر
+├── background.js           # سرویس‌ورکر افزونه
+├── docker-compose.yml      # تنظیمات وب‌سرور محلی
+├── Dockerfile              # image ایستای Nginx
+├── nginx.conf              # پیکربندی سایت در Nginx
+├── sitemap.xml             # نقشهٔ صفحه‌ها و نسخه‌های زبانی
+└── LICENSE                 # مجوز GNU GPL نسخهٔ ۳ یا بالاتر
+```
+
+صفحه‌های عمومی با HTML و CSS داخلی ارائه می‌شوند. کد JavaScript استودیو برای مدیریت وضعیت، رسم، تعامل، صدا، تئوری موسیقی، MIDI، تاریخچه و خروجی به ماژول‌های جدا تقسیم شده است.
+
+## توسعه و مشارکت
+
+برای تغییر محتوا، فایل HTML مربوط به همان صفحه را ویرایش کنید. استایل صفحه‌های اصلی در بلوک `<style>` خودشان قرار دارد؛ استایل استودیو در `css/style.css` و رفتار برنامه در `js/` است.
+
+هنگام تغییر صفحه‌های عمومی، متن و متادیتای هر زبان را هماهنگ نگه دارید، مسیر تصویرها را بررسی کنید و اگر نشانی عمومی یا تاریخ آخرین تغییر آن عوض شد، `sitemap.xml` را نیز به‌روز کنید. ادعاهای محصول باید با قابلیت‌های قابل‌مشاهده و مجوز پروژه سازگار باشند.
+
+گزارش مشکل و درخواست ادغام پذیرفته می‌شود. برای تغییرات بزرگ بهتر است ابتدا مسئله‌ای ثبت کنید تا هدف تغییر روشن شود. فایل‌های محیط محلی، اطلاعات دسترسی و خروجی‌های پروژه را commit نکنید.
+
+## مجوز
+
+شنوبین نرم‌افزار آزاد است و تحت **مجوز عمومی همگانی گنو، نسخهٔ ۳ یا بنا به انتخاب شما هر نسخهٔ جدیدتر** منتشر می‌شود. متن مجوز و شرایط بازتوزیع در فایل [LICENSE](LICENSE) قرار دارد.
+
+برای پرسش دربارهٔ مجوز تجاری با [سروش زنده‌دل](mailto:Soroush_Zendedel@Live.com) تماس بگیرید. تا زمانی که مجوز جداگانه‌ای توافق نشده باشد، شرایط فایل `LICENSE` برقرار است.
