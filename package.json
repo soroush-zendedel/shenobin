@@ -1,0 +1,10 @@
+{
+  "name": "shenobin-public-pages",
+  "private": true,
+  "scripts": {
+    "build:css": "tailwindcss -i ./css/landing.input.css -o ./css/landing.css --minify"
+  },
+  "devDependencies": {
+    "tailwindcss": "3.4.17"
+  }
+}

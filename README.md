@@ -3,7 +3,7 @@
 ![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)
 ![License](https://img.shields.io/badge/license-GPLv3-green.svg)
 ![Platform](https://img.shields.io/badge/platform-Web%20%7C%20Chrome%20Ext-orange.svg)
-![Dependencies](https://img.shields.io/badge/dependencies-zero-brightgreen.svg)
+![Runtime Dependencies](https://img.shields.io/badge/runtime%20dependencies-zero-brightgreen.svg)
 
 ## Visual Theory & Creative Studio - ShenoBin Music Project
 
@@ -204,6 +204,17 @@ The English and Persian landing pages, product pages, application, and privacy p
 ```bash
 docker compose down
 ```
+
+### Build the English landing-page CSS
+
+The English landing page uses a checked-in, locally served Tailwind stylesheet. When changing its utility classes, install the pinned build dependency and regenerate the stylesheet:
+
+```bash
+pnpm install --frozen-lockfile
+pnpm build:css
+```
+
+The generated `css/landing.css` is served directly by GitHub Pages and Docker; visitors do not need Node.js or a Tailwind CDN request.
 
 ## 🤝 Contributing & Feature Requests
 

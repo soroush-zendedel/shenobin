@@ -43,35 +43,15 @@
     }
     </script>
     
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Locally compiled Tailwind utilities keep the page independent of a runtime CSS CDN. -->
+    <link rel="stylesheet" href="css/landing.css">
     
     <!-- Google Fonts: Inter (English) & Vazirmatn (Persian) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Vazirmatn:wght@300;400;700;900&display=swap" rel="stylesheet">
 
-    <!-- Tailwind Config & Custom CSS -->
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        shenoDark: '#1e272e',
-                        shenoCyan: '#00d2d3',
-                        shenoGray: '#2d3436',
-                        glassBg: 'rgba(30, 39, 46, 0.65)',
-                        glassBorder: 'rgba(255, 255, 255, 0.1)',
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'Vazirmatn', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
-
+    <!-- Landing-page-specific glass and background styles. -->
     <style>
         /* Custom Glassmorphism Styles */
         body {
