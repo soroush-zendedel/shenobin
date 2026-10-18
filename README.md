@@ -216,6 +216,10 @@ pnpm build:css
 
 The generated `css/landing.css` is retained as a build artifact; the build script also synchronizes it into `index.html`. GitHub Pages and Docker serve the ready-to-render HTML, so visitors do not need Node.js or a Tailwind CDN request.
 
+### Persian web font
+
+The Persian landing and product pages use locally hosted Vazirmatn WOFF2 subsets for Arabic/Persian and Latin characters. The font license is included at `assets/fonts/OFL.txt`; the pages do not request the font from Google Fonts at runtime.
+
 ## 🤝 Contributing & Feature Requests
 
 We welcome contributions! Whether it's fixing bugs, improving the documentation, or proposing new features (like new instrument definitions), please feel free to fork the repository and submit a Pull Request.
