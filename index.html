@@ -63,14 +63,16 @@
         }
 
         @media (max-width: 640px) {
-            #navbar > div { width: calc(100% - 1rem); margin: .5rem auto; padding: .65rem .8rem; gap: .55rem; }
-            #navbar .nav-links { gap: .35rem; }
-            #navbar .nav-brand { font-size: 1rem; white-space: nowrap; }
-            #navbar .nav-brand span:first-child { font-size: 1rem; }
-            #navbar .nav-brand span:last-child { display: none; }
+            #navbar > div { width: calc(100% - 1.25rem); margin: .5rem auto; padding: .55rem .75rem; gap: .5rem; border-radius: 1rem; }
+            #navbar .nav-brand { flex-shrink: 0; min-width: max-content; gap: .25rem; font-size: 1rem; white-space: nowrap; }
+            #navbar .nav-brand span:first-child { font-size: 1rem; letter-spacing: -.02em; }
+            #navbar .nav-version { display: none; }
+            #navbar .nav-links { flex-shrink: 0; gap: .35rem; }
+            #navbar .nav-links a { white-space: nowrap; }
+            #navbar .nav-language, #navbar .nav-about { padding: .4rem .45rem; border: 1px solid rgba(255,255,255,.1); border-radius: .65rem; background: rgba(255,255,255,.035); line-height: 1; }
             #navbar .nav-features { display: none; }
             #navbar .nav-about { display: inline-block; }
-            #navbar .nav-launch { padding: .45rem .55rem; font-size: .7rem; white-space: nowrap; }
+            #navbar .nav-launch { padding: .45rem .6rem; border-radius: .7rem; font-size: .72rem; white-space: nowrap; }
             h1 { font-size: clamp(2rem, 9vw, 3rem) !important; line-height: 1.2 !important; }
             section, footer { scroll-margin-top: 6rem; }
         }
@@ -145,11 +147,11 @@
                 <span class="text-2xl font-black tracking-tighter text-white">
                     Sheno<span class="text-shenoCyan">Bin</span>
                 </span>
-                <span class="px-2 py-1 text-xs font-bold bg-shenoCyan/20 text-shenoCyan rounded-full">v1.0</span>
+                <span class="nav-version px-2 py-1 text-xs font-bold bg-shenoCyan/20 text-shenoCyan rounded-full">v1.0</span>
             </div>
             
             <div class="flex items-center gap-6 nav-links">
-                <a href="fa/" lang="fa" hreflang="fa" class="text-sm font-semibold text-gray-300 hover:text-white transition-colors">فارسی</a>
+                <a href="fa/" lang="fa" hreflang="fa" class="nav-language text-sm font-semibold text-gray-300 hover:text-white transition-colors">فارسی</a>
                 <a href="about.html" class="nav-about text-sm font-medium hover:text-shenoCyan transition-colors">About</a>
                 <a href="#features" class="nav-features hidden md:block text-sm font-medium hover:text-shenoCyan transition-colors" data-i18n="nav_features">Features</a>
                 <a href="app.html" class="nav-launch bg-shenoCyan text-shenoDark px-5 py-2 rounded-xl font-bold hover:bg-white hover:shadow-[0_0_20px_rgba(0,210,211,0.5)] transition-all inline-block" data-i18n="nav_launch">
