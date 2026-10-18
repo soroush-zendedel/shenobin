@@ -1,0 +1,10 @@
+.git
+.codex
+.agents
+node_modules
+.env
+.env.*
+README.md
+Dockerfile
+docker-compose.yml
+.dockerignore

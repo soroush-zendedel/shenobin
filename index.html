@@ -3,14 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="ShenoBin is an AI-assisted music composition and music theory workspace with creative tools for musicians.">
+    <meta name="description" content="Compose melodies, explore music theory, build drum patterns, and export MIDI or WAV in ShenoBin, a browser-based music workspace.">
     <link rel="canonical" href="https://soroush-zendedel.github.io/shenobin/">
+    <link rel="alternate" hreflang="en" href="https://soroush-zendedel.github.io/shenobin/">
+    <link rel="alternate" hreflang="fa" href="https://soroush-zendedel.github.io/shenobin/fa/">
+    <link rel="alternate" hreflang="x-default" href="https://soroush-zendedel.github.io/shenobin/">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://soroush-zendedel.github.io/shenobin/">
+    <meta name="twitter:title" content="ShenoBin | Music Composition &amp; Theory Workspace">
+    <meta name="twitter:description" content="Compose melodies, explore music theory, build drum patterns, and export MIDI or WAV in your browser.">
+    <meta name="twitter:image" content="https://soroush-zendedel.github.io/shenobin/assets/shenobin-og.jpg">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://soroush-zendedel.github.io/shenobin/">
-    <meta property="og:title" content="ShenoBin | AI Composer &amp; Music Theory Assistant">
-    <meta property="og:description" content="An AI-assisted music composition and music theory workspace with creative tools for musicians.">
+    <meta property="og:title" content="ShenoBin | Music Composition &amp; Theory Workspace">
+    <meta property="og:description" content="Compose melodies, explore music theory, build drum patterns, and export MIDI or WAV in your browser.">
     <meta property="og:image" content="https://soroush-zendedel.github.io/shenobin/assets/shenobin-og.jpg">
-    <title>ShenoBin | AI Composer & Music Theory Assistant</title>
+    <meta property="og:image:alt" content="ShenoBin music composition workspace">
+    <title>ShenoBin | Music Composition &amp; Theory Workspace</title>
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"WebSite","@id":"https://soroush-zendedel.github.io/shenobin/#website","url":"https://soroush-zendedel.github.io/shenobin/","name":"ShenoBin","inLanguage":["en","fa"]}
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "@id": "https://soroush-zendedel.github.io/shenobin/#product",
+      "name": "ShenoBin",
+      "url": "https://soroush-zendedel.github.io/shenobin/",
+      "description": "A browser-based music composition and music theory workspace with melody and drum generation, chord tools, and MIDI/WAV export.",
+      "applicationCategory": "MultimediaApplication",
+      "operatingSystem": "Any operating system with a modern web browser",
+      "browserRequirements": "JavaScript and Web Audio API",
+      "inLanguage": ["en", "fa"],
+      "isAccessibleForFree": true,
+      "license": "https://www.gnu.org/licenses/gpl-3.0.html",
+      "creator": { "@type": "Person", "name": "Soroush Zendedel" },
+      "image": "https://soroush-zendedel.github.io/shenobin/assets/shenobin-og.jpg",
+      "sameAs": "https://github.com/soroush-zendedel/shenobin"
+    }
+    </script>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -46,8 +77,21 @@
         body {
             background-color: #0f1418;
             color: #ffffff;
-            overflow-x: hidden;
+            overflow-x: clip;
             scroll-behavior: smooth;
+        }
+
+        @media (max-width: 640px) {
+            #navbar > div { width: calc(100% - 1rem); margin: .5rem auto; padding: .65rem .8rem; gap: .55rem; }
+            #navbar .nav-links { gap: .35rem; }
+            #navbar .nav-brand { font-size: 1rem; white-space: nowrap; }
+            #navbar .nav-brand span:first-child { font-size: 1rem; }
+            #navbar .nav-brand span:last-child { display: none; }
+            #navbar .nav-features { display: none; }
+            #navbar .nav-about { display: inline-block; }
+            #navbar .nav-launch { padding: .45rem .55rem; font-size: .7rem; white-space: nowrap; }
+            h1 { font-size: clamp(2rem, 9vw, 3rem) !important; line-height: 1.2 !important; }
+            section, footer { scroll-margin-top: 6rem; }
         }
 
         /* Animated Background Blobs to enhance Glassmorphism */
@@ -116,20 +160,18 @@
     <!-- Navigation Bar -->
     <nav class="fixed w-full z-50 transition-all duration-300" id="navbar">
         <div class="glass max-w-7xl mx-auto mt-4 rounded-2xl px-6 py-4 flex justify-between items-center mx-4 md:mx-auto">
-            <div class="flex items-center gap-2">
+            <div class="flex items-center gap-2 nav-brand">
                 <span class="text-2xl font-black tracking-tighter text-white">
                     Sheno<span class="text-shenoCyan">Bin</span>
                 </span>
                 <span class="px-2 py-1 text-xs font-bold bg-shenoCyan/20 text-shenoCyan rounded-full">v1.0</span>
             </div>
             
-            <div class="flex items-center gap-6">
-                <button id="langToggle" class="text-sm font-semibold text-gray-300 hover:text-white transition-colors flex items-center gap-2">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"></path></svg>
-                    <span id="langText">فارسی</span>
-                </button>
-                <a href="#features" class="hidden md:block text-sm font-medium hover:text-shenoCyan transition-colors" data-i18n="nav_features">Features</a>
-                <a href="app.html" class="bg-shenoCyan text-shenoDark px-5 py-2 rounded-xl font-bold hover:bg-white hover:shadow-[0_0_20px_rgba(0,210,211,0.5)] transition-all inline-block" data-i18n="nav_launch">
+            <div class="flex items-center gap-6 nav-links">
+                <a href="fa/" lang="fa" hreflang="fa" class="text-sm font-semibold text-gray-300 hover:text-white transition-colors">فارسی</a>
+                <a href="about.html" class="nav-about text-sm font-medium hover:text-shenoCyan transition-colors">About</a>
+                <a href="#features" class="nav-features hidden md:block text-sm font-medium hover:text-shenoCyan transition-colors" data-i18n="nav_features">Features</a>
+                <a href="app.html" class="nav-launch bg-shenoCyan text-shenoDark px-5 py-2 rounded-xl font-bold hover:bg-white hover:shadow-[0_0_20px_rgba(0,210,211,0.5)] transition-all inline-block" data-i18n="nav_launch">
                     Launch Studio
                 </a>
             </div>
@@ -337,123 +379,11 @@
             Launch ShenoBin Now
         </a>
         <p class="mt-16 text-sm text-gray-600 font-mono">© 2026 ShenoBin Creative Studio. Made with 🎵 by Soroush Zendedel.</p>
+        <a href="about.html" class="inline-block mt-5 text-sm text-gray-400 hover:text-shenoCyan">About ShenoBin</a>
+        <a href="privacy.html" class="inline-block mt-5 ml-4 text-sm text-gray-400 hover:text-shenoCyan">Privacy</a>
     </footer>
 
     <script>
-        // --- Internationalization (i18n) Data ---
-        const translations = {
-            en: {
-                nav_features: "Features",
-                nav_launch: "Launch Studio",
-                hero_badge: "Powered by Pure JavaScript & Web Audio API",
-                hero_title_1: "Where Music Theory Meets",
-                hero_title_2: "Algorithmic Composition",
-                hero_desc: "A dual-purpose web application designed for both music education and creative production. Build melodies, analyze chords, and generate beats instantly in your browser.",
-                hero_cta_main: "Open Workspace 🎹",
-                hero_cta_demo: "Play Sound Demo",
-                badge_ai: "AI Melody Engine",
-                badge_theory: "Real-time Chord Math",
-                features_title: "The Creative Engine",
-                features_subtitle: "Everything you need to sketch, learn, and produce music.",
-                feat_1_title: "Markov Melody Brain",
-                feat_1_desc: "Uses Markov Chains to learn your musical style. Draw a few notes, and the AI generates statistically matching continuations.",
-                feat_2_title: "Built-in Synthesizer",
-                feat_2_desc: "Shape your sound with integrated ADSR envelopes, multiple oscillator types (Sine, Saw, Square), and built-in Delay/Reverb FX.",
-                feat_3_title: "Smart Drum Kits",
-                feat_3_desc: "Generate complex rhythms instantly. Select a genre (Rock, Trap, Techno) and let the engine build the perfect beat with humanization.",
-                feat_4_title: "Interactive Theory",
-                feat_4_desc: "Visualize diatonic relationships with the interactive Circle of Fifths. Click a key and watch the piano roll adapt instantly.",
-                feat_5_title: "Song Blueprinting",
-                feat_5_desc: "Map out entire tracks with the Structure Wizard. Define genre, templates, and vibes to generate full cinematic arrangements.",
-                feat_6_title: "Advanced Harmony",
-                feat_6_desc: "A real-time harmony spell-checker. Calculate complex chords, invert them, and use the Recommender to find the next perfect progression.",
-                workflow_title: "From Practice to Export",
-                wf_1_title: "Practice Mode HUD",
-                wf_1_desc: "A 'Heads-Up Display' showing the current playing chord and what's coming up next, perfect for instrumentalists playing along.",
-                wf_2_title: "Cloud & Local Storage",
-                wf_2_desc: "Save your projects locally as JSON or push them directly to the cloud to access your ideas from anywhere.",
-                wf_3_title: "Zero-Loss Exports",
-                wf_3_desc: "Don't let ideas stay in the browser. Export standard MIDI files for Ableton/FL Studio, or render high-quality WAV audio.",
-                os_title: "Proudly Open Source",
-                os_desc: "ShenoBin is built for the community. Explore the code, contribute your ideas, report issues, or give us a star on GitHub!",
-                os_github: "View on GitHub",
-                os_live: "Live Website",
-                os_issues: "Report an Issue",
-                footer_title: "Ready to Make Music?",
-                footer_desc: "No installation, no login required. Experience the power of ShenoBin instantly in your browser.",
-                footer_btn: "Launch ShenoBin Now"
-            },
-            fa: {
-                nav_features: "ویژگی‌ها",
-                nav_launch: "اجرای استودیو",
-                hero_badge: "قدرت گرفته از جاوااسکریپت خالص و Web Audio API",
-                hero_title_1: "جایی که تئوری موسیقی با",
-                hero_title_2: "آهنگسازی الگوریتمی ترکیب می‌شود",
-                hero_desc: "یک وب‌اپلیکیشن دوگانه برای آموزش موسیقی و تولید خلاقانه. ملودی بسازید، آکوردها را تحلیل کنید و در لحظه روی مرورگر خود بیت بسازید.",
-                hero_cta_main: "ورود به محیط کار 🎹",
-                hero_cta_demo: "پخش صدای دمو",
-                badge_ai: "موتور ملودی هوش مصنوعی",
-                badge_theory: "محاسبات آکورد در لحظه",
-                features_title: "موتور خلاقیت شما",
-                features_subtitle: "هر آنچه برای ایده پردازی، یادگیری و تولید موسیقی نیاز دارید.",
-                feat_1_title: "مغز ملودی مارکوف",
-                feat_1_desc: "از زنجیره مارکوف برای یادگیری سبک شما استفاده میکند. چند نت بکشید تا هوش مصنوعی ادامه آن را بر اساس آمار و احتمالات بسازد.",
-                feat_2_title: "سینتی‌سایزر داخلی",
-                feat_2_desc: "صدای خود را با پاکت‌های ADSR، اسیلاتورهای مختلف (سینوسی، مربعی) و افکت‌های Delay/Reverb شخصی‌سازی کنید.",
-                feat_3_title: "درام کیت هوشمند",
-                feat_3_desc: "ریتم‌های پیچیده را در لحظه تولید کنید. سبک مورد نظر (راک، ترپ، تکنو) را انتخاب کنید تا موتور بهترین بیت را با حس انسانی بسازد.",
-                feat_4_title: "تئوری تعاملی",
-                feat_4_desc: "روابط دیاتونیک را با دایره پنجم‌ها (Circle of Fifths) به تصویر بکشید. گام را تغییر دهید و تطبیق محیط کار را در لحظه ببینید.",
-                feat_5_title: "جادوگر ساختار آهنگ",
-                feat_5_desc: "نقشه کل آهنگ را با Structure Wizard طراحی کنید. سبک، تمپلیت و حال و هوا را مشخص کنید تا تنظیم‌های سینماتیک خلق شود.",
-                feat_6_title: "هارمونی پیشرفته",
-                feat_6_desc: "غلط‌یاب هارمونی در لحظه. آکوردهای پیچیده را محاسبه کنید، آن‌ها را معکوس کنید و از سیستم پیشنهاد دهنده برای پیشروی آکوردها استفاده کنید.",
-                workflow_title: "از تمرین تا خروجی نهایی",
-                wf_1_title: "رابط کاربری حالت تمرین",
-                wf_1_desc: "یک نمایشگر HUD که آکورد در حال پخش و آکورد بعدی را نشان می‌دهد، ایده‌آل برای نوازندگانی که با آهنگ هم‌نوازی می‌کنند.",
-                wf_2_title: "فضای ابری و محلی",
-                wf_2_desc: "پروژه‌های خود را به صورت JSON محلی ذخیره کنید یا در فضای ابری قرار دهید تا از هر جایی به ایده‌های خود دسترسی داشته باشید.",
-                wf_3_title: "خروجی بدون افت کیفیت",
-                wf_3_desc: "اجازه ندهید ایده‌ها در مرورگر بمانند. خروجی استاندارد MIDI برای ابلتون/اف‌ال استودیو یا رندر صوتی با کیفیت WAV بگیرید.",
-                os_title: "با افتخار متن‌باز (Open Source)",
-                os_desc: "شنوبین برای جامعه توسعه‌دهندگان و هنرمندان ساخته شده است. کدها را بررسی کنید، ایده بدهید، مشکلات را گزارش کنید یا در گیت‌هاب به ما ستاره بدهید!",
-                os_github: "مشاهده در گیت‌هاب",
-                os_live: "وب‌سایت اصلی",
-                os_issues: "گزارش مشکل / باگ",
-                footer_title: "آماده ساخت موسیقی هستید؟",
-                footer_desc: "بدون نیاز به نصب و ورود. قدرت ShenoBin را در لحظه روی مرورگر خود تجربه کنید.",
-                footer_btn: "همین حالا شروع کنید"
-            }
-        };
-
-        let currentLang = 'en';
-
-        // --- Language Toggle Logic ---
-        const langToggleBtn = document.getElementById('langToggle');
-        const langText = document.getElementById('langText');
-        const htmlTag = document.documentElement;
-
-        function setLanguage(lang) {
-            currentLang = lang;
-            const dict = translations[lang];
-            
-            // Update direction and font
-            htmlTag.setAttribute('dir', lang === 'fa' ? 'rtl' : 'ltr');
-            langText.textContent = lang === 'fa' ? 'English' : 'فارسی';
-
-            // Update all texts
-            document.querySelectorAll('[data-i18n]').forEach(el => {
-                const key = el.getAttribute('data-i18n');
-                if (dict[key]) {
-                    el.textContent = dict[key];
-                }
-            });
-        }
-
-        langToggleBtn.addEventListener('click', () => {
-            setLanguage(currentLang === 'en' ? 'fa' : 'en');
-        });
-
         // --- Navbar Scroll Effect ---
         window.addEventListener('scroll', () => {
             const nav = document.getElementById('navbar');
@@ -468,52 +398,30 @@
             }
         });
 
-        // --- Web Audio API Easter Egg (Sound Demo) ---
+        // --- Web Audio API Sound Demo ---
         let audioCtx = null;
         const playBtn = document.getElementById('playDemoBtn');
-        let isPlaying = false;
-
         playBtn.addEventListener('click', () => {
-            if (!audioCtx) {
-                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-            }
-
-            // Play a lush major 7th chord arpeggio
-            if (audioCtx.state === 'suspended') {
-                audioCtx.resume();
-            }
-
+            if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            if (audioCtx.state === 'suspended') audioCtx.resume();
             const now = audioCtx.currentTime;
-            
-            // Frequencies for C Major 7 (C4, E4, G4, B4)
             const freqs = [261.63, 329.63, 392.00, 493.88];
-            
             playBtn.classList.add('animate-pulse', 'border-shenoCyan', 'text-shenoCyan');
-            
             freqs.forEach((freq, i) => {
                 const osc = audioCtx.createOscillator();
                 const gain = audioCtx.createGain();
-                
                 osc.type = 'triangle';
-                osc.frequency.setValueAtTime(freq, now + i * 0.15); // Arpeggiate
-                
-                // Envelope (ADSR)
+                osc.frequency.setValueAtTime(freq, now + i * 0.15);
                 gain.gain.setValueAtTime(0, now + i * 0.15);
-                gain.gain.linearRampToValueAtTime(0.3, now + i * 0.15 + 0.1); // Attack
-                gain.gain.exponentialRampToValueAtTime(0.01, now + i * 0.15 + 1.5); // Decay/Release
-                
+                gain.gain.linearRampToValueAtTime(0.3, now + i * 0.15 + 0.1);
+                gain.gain.exponentialRampToValueAtTime(0.01, now + i * 0.15 + 1.5);
                 osc.connect(gain);
                 gain.connect(audioCtx.destination);
-                
                 osc.start(now + i * 0.15);
                 osc.stop(now + i * 0.15 + 1.6);
             });
-
-            setTimeout(() => {
-                playBtn.classList.remove('animate-pulse', 'border-shenoCyan', 'text-shenoCyan');
-            }, 1800);
+            setTimeout(() => playBtn.classList.remove('animate-pulse', 'border-shenoCyan', 'text-shenoCyan'), 1800);
         });
-
     </script>
     <script>
         // بررسی اینکه آیا برنامه در محیط افزونه در حال اجراست یا خیر

@@ -184,6 +184,27 @@ Simply open `index.html`. No build steps (npm/yarn) required.
 > npx serve
 > ```
 
+### Run the website with Docker Compose
+
+Install and start Docker Desktop, then run these commands from the project directory:
+
+```bash
+docker compose up --build -d
+```
+
+Open [http://localhost:8080](http://localhost:8080). The service is bound to localhost only. To use another host port, set `SHENOBIN_PORT` before starting Compose:
+
+```powershell
+$env:SHENOBIN_PORT = "8081"
+docker compose up --build -d
+```
+
+The English and Persian landing pages, product pages, application, and privacy page are served as static files by Nginx. To stop the local server, run:
+
+```bash
+docker compose down
+```
+
 ## 🤝 Contributing & Feature Requests
 
 We welcome contributions! Whether it's fixing bugs, improving the documentation, or proposing new features (like new instrument definitions), please feel free to fork the repository and submit a Pull Request.
