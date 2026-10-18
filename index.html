@@ -141,14 +141,14 @@
       .workflow-images { grid-template-columns: repeat(2, minmax(0,1fr)); align-items: start; }
       .workflow-images img:last-child { width: 100%; }
     }
-    @media (max-width: 640px) {
+    @media (max-width: 760px) {
       .wrap { width: min(100% - 1.25rem, 1160px); }
-      .site-nav { min-height: 0; flex-direction: column; align-items: stretch; gap: .55rem; padding-block: .7rem; }
+      .site-nav { min-height: 60px; flex-direction: row; align-items: center; gap: .55rem; padding-block: .55rem; }
       .brand { font-size: 1.05rem; }
-      .version, .nav-features { display: none; }
-      .nav-links { justify-content: flex-start; gap: .55rem; }
-      .nav-links a { min-height: 38px; display: inline-flex; align-items: center; padding: .35rem .7rem; border: 1px solid rgba(255,255,255,.08); border-radius: .65rem; background: rgba(255,255,255,.035); font-size: .84rem; }
-      .nav-links .launch { margin-left: auto; padding-inline: .85rem; border-color: var(--cyan); background: var(--cyan); font-size: .8rem; }
+      .version { display: none; }
+      .nav-links { flex: 0 0 auto; gap: clamp(.25rem, 1vw, .55rem); }
+      .nav-links a { min-height: 38px; display: inline-flex; align-items: center; padding: .35rem clamp(.35rem, 1.2vw, .7rem); border: 1px solid rgba(255,255,255,.08); border-radius: .65rem; background: rgba(255,255,255,.035); font-size: clamp(.72rem, 1.7vw, .84rem); }
+      .nav-links .launch { padding-inline: clamp(.45rem, 1.5vw, .85rem); border-color: var(--cyan); background: var(--cyan); font-size: clamp(.7rem, 1.6vw, .8rem); }
       .hero { padding-top: 3rem; }
       .actions { gap: .6rem; }
       .button { padding-inline: .9rem; font-size: .93rem; }
@@ -156,6 +156,14 @@
       .workflow-item { grid-template-columns: 2.7rem minmax(0,1fr); gap: .7rem; }
       .workflow-icon { width: 2.7rem; height: 2.7rem; }
       .community { border-radius: 1rem; }
+    }
+    @media (max-width: 460px) {
+      .site-nav { gap: .35rem; }
+      .brand { font-size: .96rem; }
+      .nav-features { display: none !important; }
+      .nav-links { gap: .25rem; }
+      .nav-links a { padding-inline: .35rem; font-size: .72rem; }
+      .nav-links .launch { padding-inline: .45rem; font-size: .7rem; }
     }
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
