@@ -109,7 +109,7 @@
     .preview { width: 100%; margin-top: clamp(2rem, 5vw, 3.5rem); border: 1px solid var(--border); border-radius: 1rem; box-shadow: 0 1.5rem 4rem rgba(0,0,0,.35); }
     section.content-section { padding: clamp(3rem, 7vw, 5rem) 0; }
     .section-heading { margin: 0 auto 2rem; text-align: center; }
-    .section-heading h2, .workflow h2, .community h2, .footer h2 { margin-bottom: .5rem; font-size: clamp(1.7rem, 4vw, 2.5rem); line-height: 1.2; letter-spacing: -.035em; }
+    .section-heading h2, .community h2, .footer h2 { margin-bottom: .5rem; font-size: clamp(1.7rem, 4vw, 2.5rem); line-height: 1.2; letter-spacing: -.035em; }
     .section-heading p { margin-bottom: 0; color: var(--muted); }
     .feature-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 1rem; }
     .feature { min-width: 0; overflow: hidden; border: 1px solid var(--border); border-radius: 1rem; background: var(--surface); }
@@ -120,16 +120,6 @@
     .feature-copy { padding: 1rem 1.15rem 1.25rem; }
     .feature-copy h3 { margin-bottom: .4rem; color: var(--cyan); font-size: 1.12rem; line-height: 1.35; }
     .feature-copy p { margin-bottom: 0; color: var(--muted); font-size: .95rem; }
-    .workflow { border-block: 1px solid rgba(255,255,255,.08); background: rgba(0,0,0,.24); }
-    .workflow-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); align-items: center; gap: 2rem; }
-    .workflow-list { display: grid; gap: 1.25rem; }
-    .workflow-item { display: grid; grid-template-columns: 3rem minmax(0,1fr); align-items: start; gap: .85rem; }
-    .workflow-icon { width: 3rem; height: 3rem; display: grid; place-items: center; border-radius: 50%; background: rgba(0,210,211,.12); font-size: 1.25rem; }
-    .workflow-item h3 { margin: 0 0 .25rem; font-size: 1.08rem; }
-    .workflow-item p { margin: 0; color: var(--muted); }
-    .workflow-images { min-width: 0; display: grid; gap: 1rem; }
-    .workflow-images img { width: 100%; border: 1px solid rgba(255,255,255,.13); border-radius: .85rem; }
-    .workflow-images img:last-child { width: 76%; justify-self: start; }
     .community { padding: clamp(1.5rem, 5vw, 3rem); border: 1px solid var(--border); border-radius: 1.4rem; background: var(--surface); text-align: center; }
     .community p { max-width: 680px; margin: .6rem auto 1.25rem; color: var(--muted); }
     .community .actions { margin-bottom: 0; }
@@ -140,9 +130,6 @@
     .footer-links a:hover { color: var(--cyan); }
     @media (max-width: 900px) {
       .feature-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
-      .workflow-grid { grid-template-columns: 1fr; }
-      .workflow-images { grid-template-columns: repeat(2, minmax(0,1fr)); align-items: start; }
-      .workflow-images img:last-child { width: 100%; }
     }
     @media (max-width: 760px) {
       .wrap { width: min(100% - 1.25rem, 1160px); }
@@ -155,9 +142,7 @@
       .hero { padding-top: 3rem; }
       .actions { gap: .6rem; }
       .button { padding-inline: .9rem; font-size: .93rem; }
-      .feature-grid, .workflow-images { grid-template-columns: 1fr; }
-      .workflow-item { grid-template-columns: 2.7rem minmax(0,1fr); gap: .7rem; }
-      .workflow-icon { width: 2.7rem; height: 2.7rem; }
+      .feature-grid { grid-template-columns: 1fr; }
       .community { border-radius: 1rem; }
     }
     @media (max-width: 460px) {
@@ -236,23 +221,18 @@
             <div class="feature-media pair"><img src="img/chord-calculator.jpg" alt="Chord calculator" loading="lazy"><img src="img/chord-recommender.jpg" alt="Chord progression recommender" loading="lazy"></div>
             <div class="feature-copy"><h3>Harmony Tools</h3><p>Calculate and invert chords, then explore harmonic directions with suggestions in the selected key.</p></div>
           </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="content-section workflow" aria-labelledby="workflow-title">
-      <div class="wrap workflow-grid">
-        <div>
-          <h2 id="workflow-title">From practice to export</h2>
-          <div class="workflow-list">
-            <article class="workflow-item"><span class="workflow-icon" aria-hidden="true">🎸</span><div><h3>Practice Mode HUD</h3><p>See the current chord and what comes next while you play along with a piece.</p></div></article>
-            <article class="workflow-item"><span class="workflow-icon" aria-hidden="true">☁️</span><div><h3>Local and cloud storage</h3><p>Save projects locally as JSON or use cloud storage to access your ideas again.</p></div></article>
-            <article class="workflow-item"><span class="workflow-icon" aria-hidden="true">💾</span><div><h3>MIDI and WAV export</h3><p>Continue working with MIDI in tools such as Ableton or FL Studio, or render an audio WAV file.</p></div></article>
-          </div>
-        </div>
-        <div class="workflow-images">
-          <img src="img/practice-mode.jpg" alt="Practice Mode showing a chord while a piece plays" loading="lazy">
-          <img src="img/exports.jpg" alt="Export options for a ShenoBin project" loading="lazy">
+          <article class="feature">
+            <div class="feature-media"><img src="img/practice-mode.jpg" alt="Practice Mode showing a chord while a piece plays" loading="lazy"></div>
+            <div class="feature-copy"><h3>Practice Mode HUD</h3><p>See the current chord and what comes next while you play along with a piece.</p></div>
+          </article>
+          <article class="feature">
+            <div class="feature-media"><img src="img/cloud.jpg" alt="Local and cloud project storage options" loading="lazy"></div>
+            <div class="feature-copy"><h3>Local and Cloud Storage</h3><p>Save projects locally as JSON or use cloud storage to access your ideas again.</p></div>
+          </article>
+          <article class="feature">
+            <div class="feature-media"><img src="img/exports.jpg" alt="Export options for a ShenoBin project" loading="lazy"></div>
+            <div class="feature-copy"><h3>MIDI and WAV Export</h3><p>Continue working with MIDI in tools such as Ableton or FL Studio, or render an audio WAV file.</p></div>
+          </article>
         </div>
       </div>
     </section>

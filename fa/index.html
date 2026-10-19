@@ -98,23 +98,13 @@
     .feature-copy { padding: 1rem 1.15rem 1.3rem; }
     .feature-copy h3 { color: #00d2d3; margin: 0 0 .35rem; font-size: 1.12rem; }
     .feature-copy p { color: #c0c9cc; margin: 0; }
-    .workflow { background: #080b0d88; border-block: 1px solid #ffffff12; }
-    .workflow-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: center; gap: 2rem; }
-    .workflow-list { display: grid; gap: 1.25rem; }
-    .workflow-item { display: grid; grid-template-columns: 3rem minmax(0, 1fr); align-items: start; gap: .8rem; }
-    .workflow-icon { width: 3rem; height: 3rem; display: grid; place-items: center; border-radius: 50%; background: #00d2d322; font-size: 1.25rem; }
-    .workflow-item h3 { margin: 0 0 .2rem; font-size: 1.08rem; }
-    .workflow-item p { margin: 0; color: #c0c9cc; }
-    .workflow-images { display: grid; gap: 1rem; min-width: 0; }
-    .workflow-images img { display: block; width: 100%; height: auto; border: 1px solid #ffffff22; border-radius: .85rem; }
-    .workflow-images img:last-child { width: 72%; justify-self: start; }
     .community { text-align: center; background: #182228; border: 1px solid #2e4248; border-radius: 1.5rem; padding: clamp(1.5rem, 5vw, 3rem); }
     .community p { color: #d2dadd; margin: .5rem auto 1.25rem; }
     .community .actions { margin-bottom: 0; }
     .footer { text-align: center; padding: 3rem 0; color: #aebbc0; }
     .footer p { margin: .5rem auto 1rem; }
     .footer-links { display: flex; flex-wrap: wrap; justify-content: center; gap: .6rem 1.25rem; margin-top: 1.5rem; }
-    @media (max-width: 900px) { .feature-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .workflow-grid { grid-template-columns: 1fr; } .workflow-images { grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; } .workflow-images img:last-child { width: 100%; } }
+    @media (max-width: 900px) { .feature-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
     @media (max-width: 640px) {
       .wrap { width: min(100% - 1.25rem, 1160px); }
       .site-nav { flex-wrap: nowrap; }
@@ -124,8 +114,6 @@
       html.js .nav-links a { min-height: 44px; display: flex; align-items: center; padding: .55rem .75rem; border-radius: .5rem; }
       html.js .nav-links .launch { justify-content: center; padding: .45rem .75rem; }
       .feature-grid { grid-template-columns: 1fr; }
-      .workflow-images { grid-template-columns: 1fr; }
-      .workflow-images img:last-child { width: 82%; }
       .hero { padding-top: 2.5rem; }
     }
   </style>
@@ -188,23 +176,18 @@
             <div class="feature-media pair"><img src="../img/chord-calculator.jpg" alt="محاسبه‌گر آکورد شنوبین" loading="lazy"><img src="../img/chord-recommender.jpg" alt="پیشنهاددهندهٔ آکورد شنوبین" loading="lazy"></div>
             <div class="feature-copy"><h3>ابزارهای هارمونی</h3><p>آکوردها را محاسبه و معکوس کنید و با پیشنهاددهنده، مسیرهای هارمونیک بعدی را در گام انتخاب‌شده بررسی کنید.</p></div>
           </article>
-        </div>
-      </section>
-
-      <section class="workflow" aria-labelledby="workflow-title">
-        <div class="workflow-grid">
-          <div>
-            <h2 id="workflow-title">از تمرین تا خروجی گرفتن</h2>
-            <div class="workflow-list">
-              <article class="workflow-item"><span class="workflow-icon" aria-hidden="true">🎸</span><div><h3>نمای تمرین</h3><p>حالت تمرین آکورد در حال پخش و آکورد بعدی را نشان می‌دهد تا نوازنده بتواند همراه قطعه بنوازد.</p></div></article>
-              <article class="workflow-item"><span class="workflow-icon" aria-hidden="true">☁️</span><div><h3>ذخیرهٔ محلی و ابری</h3><p>پروژه را به‌صورت فایل JSON روی دستگاه ذخیره کنید یا از قابلیت ذخیره‌سازی ابری برای دسترسی دوباره به ایده‌ها استفاده کنید.</p></div></article>
-              <article class="workflow-item"><span class="workflow-icon" aria-hidden="true">💾</span><div><h3>خروجی MIDI و WAV</h3><p>فایل MIDI را در نرم‌افزارهایی مثل Ableton و FL Studio ادامه دهید یا از ایدهٔ خود خروجی صوتی WAV بگیرید.</p></div></article>
-            </div>
-          </div>
-          <div class="workflow-images">
-            <img src="../img/practice-mode.jpg" alt="نمای حالت تمرین و آکورد در حال پخش" loading="lazy">
-            <img src="../img/exports.jpg" alt="گزینه‌های خروجی گرفتن از پروژهٔ شنوبین" loading="lazy">
-          </div>
+          <article class="feature">
+            <div class="feature-media"><img src="../img/practice-mode.jpg" alt="نمای حالت تمرین و آکورد در حال پخش" loading="lazy"></div>
+            <div class="feature-copy"><h3>نمای تمرین</h3><p>حالت تمرین آکورد در حال پخش و آکورد بعدی را نشان می‌دهد تا نوازنده بتواند همراه قطعه بنوازد.</p></div>
+          </article>
+          <article class="feature">
+            <div class="feature-media"><img src="../img/cloud.jpg" alt="گزینه‌های ذخیره‌سازی محلی و ابری پروژه‌ها" loading="lazy"></div>
+            <div class="feature-copy"><h3>ذخیرهٔ محلی و ابری</h3><p>پروژه را به‌صورت فایل JSON روی دستگاه ذخیره کنید یا از قابلیت ذخیره‌سازی ابری برای دسترسی دوباره به ایده‌ها استفاده کنید.</p></div>
+          </article>
+          <article class="feature">
+            <div class="feature-media"><img src="../img/exports.jpg" alt="گزینه‌های خروجی گرفتن از پروژهٔ شنوبین" loading="lazy"></div>
+            <div class="feature-copy"><h3>خروجی MIDI و WAV</h3><p>فایل MIDI را در نرم‌افزارهایی مثل Ableton و FL Studio ادامه دهید یا از ایدهٔ خود خروجی صوتی WAV بگیرید.</p></div>
+          </article>
         </div>
       </section>
 
