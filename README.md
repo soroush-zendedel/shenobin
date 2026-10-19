@@ -36,6 +36,16 @@ ShenoBin is intended for music learners and teachers, songwriters, and producers
 
 The landing and About pages are available in English and Persian. `sitemap.xml` lists the public pages and the reciprocal language alternatives for translated pairs.
 
+## SEO and structured data
+
+The published base path is `https://soroush-zendedel.github.io/shenobin/` (the GitHub Pages project subpath); canonical URLs, Open Graph URLs, and sitemap locations use that path. The top-level website `https://soroush-zendedel.github.io/` is a separate site outside this repository. It appears as the first breadcrumb destination on the About and Privacy pages and must not be added to this repository's sitemap.
+
+English and Persian landing pages and About pages are reciprocal `en`/`fa` alternates. Studio and Privacy currently have English content only and do not claim a Persian alternate. `sitemap.xml` lists only repository-owned pages. No `robots.txt` is needed for this static project; the sitemap is available at `/shenobin/sitemap.xml`.
+
+The landing pages and Studio describe ShenoBin with `WebApplication` JSON-LD. About pages also identify their content as `AboutPage`. About and Privacy pages include a visible breadcrumb and matching `BreadcrumbList` JSON-LD for the meaningful path from the main website to ShenoBin and the current page. The landing page and Studio are destinations, so they have no breadcrumb. Keep each visible trail, structured-data trail, canonical URL, language alternate, and sitemap entry aligned when editing public pages. Google may choose not to show a rich result even when markup is valid.
+
+After publishing, validate structured data with [Rich Results Test](https://search.google.com/test/rich-results), then inspect the canonical URLs and indexing status in [Search Console URL Inspection](https://search.google.com/search-console). No frontend build step is configured; the checked-in static HTML is served directly.
+
 ## Run locally
 
 The site is served as static files. You do not need Node.js, npm, pnpm, or a frontend build step. Run a local web server from the project root; opening `app.html` directly as a `file://` URL may prevent JavaScript modules from loading.
@@ -163,6 +173,16 @@ For inquiries about commercial licensing, contact [Soroush Zendedel](mailto:Soro
 | حریم خصوصی | [سیاست حریم خصوصی](https://soroush-zendedel.github.io/shenobin/privacy.html) · `/privacy.html` | صفحهٔ منتشرشدهٔ حریم خصوصی فعلاً انگلیسی است. |
 
 صفحه‌های اصلی و معرفی محصول به فارسی و انگلیسی در دسترس‌اند. `sitemap.xml` صفحه‌های عمومی و پیوندهای متقابل نسخه‌های ترجمه‌شده را فهرست می‌کند.
+
+## سئو و داده‌های ساخت‌یافته
+
+مسیر پایهٔ انتشار `https://soroush-zendedel.github.io/shenobin/` است؛ این پروژه در زیرمسیر GitHub Pages قرار دارد و نشانی‌های canonical، Open Graph و sitemap همین مسیر را به‌کار می‌برند. وب‌سایت اصلی در `https://soroush-zendedel.github.io/` بیرون از این مخزن است. در Breadcrumb صفحه‌های معرفی و حریم خصوصی به‌عنوان مقصد نخست دیده می‌شود و نباید به sitemap این مخزن افزوده شود.
+
+صفحه‌های اصلی و معرفی فارسی و انگلیسی، alternateهای متقابل `en` و `fa` دارند. استودیو و حریم خصوصی فعلاً فقط انگلیسی‌اند و alternate فارسی معرفی نمی‌کنند. `sitemap.xml` فقط صفحه‌های متعلق به همین مخزن را فهرست می‌کند. برای این پروژهٔ ایستا به `robots.txt` نیازی نیست؛ sitemap در `/shenobin/sitemap.xml` قرار دارد.
+
+صفحه‌های اصلی و استودیو از JSON-LD نوع `WebApplication` استفاده می‌کنند. صفحه‌های معرفی، محتوای خود را `AboutPage` نیز معرفی می‌کنند. صفحه‌های معرفی و حریم خصوصی Breadcrumb قابل‌مشاهده و JSON-LD متناظر از وب‌سایت اصلی تا شنوبین و صفحهٔ جاری دارند. صفحهٔ اصلی و استودیو مقصد مستقل‌اند و Breadcrumb ندارند. هنگام ویرایش صفحه‌های عمومی، مسیر قابل‌مشاهده، دادهٔ ساخت‌یافته، canonical، نسخه‌های زبانی و sitemap را هماهنگ نگه دارید. معتبر بودن نشانه‌گذاری، نمایش rich result در گوگل را تضمین نمی‌کند.
+
+پس از انتشار، دادهٔ ساخت‌یافته را با [Rich Results Test](https://search.google.com/test/rich-results) بررسی و canonical و وضعیت ایندکس‌شدن را در [URL Inspection سرچ کنسول](https://search.google.com/search-console) پیگیری کنید. مرحلهٔ build فرانت‌اندی پیکربندی نشده و HTML ایستا مستقیماً ارائه می‌شود.
 
 ## اجرای محلی
 
